@@ -1,0 +1,66 @@
+﻿
+
+@model Usuario
+
+<form asp-controller="Usuario" asp-action="Create" method="post">
+    
+    <div id="container-login">
+        <h1 id="text-usuario"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+          </svg>Cadastro</h1>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Nome Completo</label> 
+                        <input type="text" class="form-control" asp-for="nome" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Email</label>
+                        <input type="text" class="form-control" asp-for="email"/>
+                    </div>
+                   
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>CPF</label>
+                        <input type="text" class="form-control" asp-for="cpf"/>
+                    </div>
+                   
+                    <div class="col-md-6">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control"asp-for="telefone"/>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Senha</label>
+                        <input type="password" class="form-control" asp-for="senha"/>
+                    </div>
+                  
+                    <div class="col-md-6">
+                        <label>Confirmar Senha</label>
+                        <input type="password" class="form-control" asp-for="senha"/>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-md-12 d-flex justify-content-center">
+                    <button id="btn-usuario" type="button"  class="btn btn-warning btn-outline-primary" >Cadastrar</button>
+                </div>
+ @if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData["MensagemErro"]
+    </div>
+}
+            </div>
+        </div>
+    </div>
+    
+</form>
