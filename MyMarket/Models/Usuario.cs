@@ -13,7 +13,7 @@ namespace MyMarket.Models
         public string email { get; set; }
         public string nome { get; set; }
         public string senha { get; set; }
-
+        public string confirmarSenha { get; set; }
         public string? cpf { get; set; }
         public string telefone { get; set; }
         public ICollection<Pedido>? pedidos { get; set; }

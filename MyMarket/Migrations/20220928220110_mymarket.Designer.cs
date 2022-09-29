@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMarket.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220928220110_mymarket")]
+    partial class mymarket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,9 +95,6 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int>("Produtoid")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
 
@@ -105,12 +104,7 @@ namespace MyMarket.Migrations
                     b.Property<int>("estoqueAtual")
                         .HasColumnType("integer");
 
-                    b.Property<int>("idproduto")
-                        .HasColumnType("integer");
-
                     b.HasKey("id");
-
-                    b.HasIndex("Produtoid");
 
                     b.ToTable("estoques");
                 });
@@ -131,12 +125,6 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("idpedido")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("idproduto")
-                        .HasColumnType("integer");
 
                     b.Property<decimal>("precoItemProduto")
                         .HasColumnType("numeric");
@@ -165,6 +153,9 @@ namespace MyMarket.Migrations
                     b.Property<int>("idUsuario")
                         .HasColumnType("integer");
 
+                    b.Property<int>("itemProdutoId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("usuarioid")
                         .HasColumnType("integer");
 
@@ -186,10 +177,6 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<byte[]>("arquivo")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
                     b.Property<int>("categoriaid")
                         .HasColumnType("integer");
 
@@ -198,6 +185,12 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("estoqueid")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("idProduto")
+                        .HasColumnType("integer");
 
                     b.Property<string>("imagem")
                         .IsRequired()
@@ -214,6 +207,7 @@ namespace MyMarket.Migrations
 
                     b.HasIndex("categoriaid");
 
+                    b.HasIndex("estoqueid");
 
                     b.ToTable("produtos");
                 });
@@ -226,7 +220,8 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-
+                    b.Property<string>("confirmarSenha")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("cpf")
@@ -270,17 +265,6 @@ namespace MyMarket.Migrations
                     b.Navigation("usuario");
                 });
 
-            modelBuilder.Entity("MyMarket.Models.Estoque", b =>
-                {
-                    b.HasOne("MyMarket.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("Produtoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>
                 {
                     b.HasOne("MyMarket.Models.Pedido", null)
@@ -301,12 +285,21 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Produto", b =>
                 {
-                    b.HasOne("MyMarket.Models.Categoria", null)
+                    b.HasOne("MyMarket.Models.Categoria", "categoria")
                         .WithMany("produtos")
                         .HasForeignKey("categoriaid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MyMarket.Models.Estoque", "estoque")
+                        .WithMany()
+                        .HasForeignKey("estoqueid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("categoria");
+
+                    b.Navigation("estoque");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>

@@ -4,6 +4,48 @@
     ViewData["Title"] = "Index";
 }
 
+  <div class="col-md-4">
+   <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+                    <div class="card-body">
+                <div class="col">
+                    <div class="card-body">
+                    <th>
+                         @Html.DisplayNameFor(model => model.nomeProduto)
+                   </th>
+                        <p class="valor-produto d-flex justify-content-center">@Html.DisplayNameFor(model => model.valorVenda)</p>
+                        <div class="row">
+                          <div class="col-md-6 d-flex justify-content-center">
+                            <p class="unidade-produto">@Html.DisplayNameFor(model => model.estoque)</p>
+                          </div>      
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>   
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estoque)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valorVenda)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<div>
+
 <h1>Index</h1>
 
 <p>
@@ -54,3 +96,4 @@
 }
     </tbody>
 </table>
+

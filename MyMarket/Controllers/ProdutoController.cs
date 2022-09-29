@@ -1,3 +1,4 @@
+
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,10 @@ namespace MyMarket.Controllers
 {
     public class ProdutoController : Controller
     {
+
+   
+    
+
         private readonly Context _bancocontext;
         private readonly IWebHostEnvironment webHostEnvironment;
         public ProdutoController(Context context, IWebHostEnvironment hostEnvironment)
@@ -16,6 +21,26 @@ namespace MyMarket.Controllers
             webHostEnvironment = hostEnvironment;
         }
 
+      public async Task<IActionResult> BuscaProdutos(string searchstring)
+        {
+
+            var produto = (from p in _bancocontext.produtos
+                           join e in _bancocontext.estoques on p.estoqueid equals e.id
+                           select new DtoProduto
+                           {
+                               id = p.id,
+                               nomeProduto = p.nomeProduto,
+                               valorVenda = p.valorVenda,
+                               estoque = e.estoqueAtual
+                           });
+
+            if (!String.IsNullOrEmpty(searchstring))
+            {
+                produto = produto.Where(s => s.nomeProduto.Contains(searchstring));
+            }
+
+            return View(await produto.ToListAsync());
+        }
         // GET: Chamada
         public async Task<IActionResult> Index()
         {
@@ -166,5 +191,6 @@ namespace MyMarket.Controllers
         {
             return (_bancocontext.produtos?.Any(e => e.id == id)).GetValueOrDefault();
         }
+
     }
 }
