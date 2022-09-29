@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMarket.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220929000206_MyMarket")]
+    partial class MyMarket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -214,7 +216,6 @@ namespace MyMarket.Migrations
 
                     b.HasIndex("categoriaid");
 
-
                     b.ToTable("produtos");
                 });
 
@@ -225,9 +226,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
-
-
-                        .HasColumnType("text");
 
                     b.Property<string>("cpf")
                         .HasColumnType("text");
@@ -306,7 +304,6 @@ namespace MyMarket.Migrations
                         .HasForeignKey("categoriaid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
