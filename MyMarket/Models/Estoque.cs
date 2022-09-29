@@ -10,8 +10,7 @@ namespace MyMarket.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public int estoqueAtual { get; set; }
-        public int idproduto { get; set; }
-        public Produto Produto { get; set; }
+        public int produtoid { get; set; }
         public DateTime dataCadastro { get; set; } = DateTime.Now;
         public DateTime dataAlteracao { get; set; } = DateTime.Now;
     }
