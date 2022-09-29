@@ -93,9 +93,6 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int>("Produtoid")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
 
@@ -105,12 +102,10 @@ namespace MyMarket.Migrations
                     b.Property<int>("estoqueAtual")
                         .HasColumnType("integer");
 
-                    b.Property<int>("idproduto")
+                    b.Property<int>("produtoid")
                         .HasColumnType("integer");
 
                     b.HasKey("id");
-
-                    b.HasIndex("Produtoid");
 
                     b.ToTable("estoques");
                 });
@@ -187,7 +182,6 @@ namespace MyMarket.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<byte[]>("arquivo")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<int>("categoriaid")
@@ -200,7 +194,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("imagem")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("nomeProduto")
@@ -268,17 +261,6 @@ namespace MyMarket.Migrations
                         .IsRequired();
 
                     b.Navigation("usuario");
-                });
-
-            modelBuilder.Entity("MyMarket.Models.Estoque", b =>
-                {
-                    b.HasOne("MyMarket.Models.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("Produtoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>
