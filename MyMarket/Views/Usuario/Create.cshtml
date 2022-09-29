@@ -21,6 +21,7 @@
                     <div class="col-md-12">
                         <label>Email</label>
                         <input type="text" class="form-control" asp-for="email"/>
+                        @Html.ValidationMessageFor(x => x.email)
                     </div>
                    
                 </div>
@@ -41,16 +42,18 @@
                     <div class="col-md-6">
                         <label>Senha</label>
                         <input type="password" class="form-control" asp-for="senha"/>
+                        @Html.ValidationMessageFor(x => x.senha)
                     </div>
                   
                     <div class="col-md-6">
                         <label>Confirmar Senha</label>
-                        <input type="password" class="form-control" asp-for="senha"/>
+                        <input type="password" class="form-control" asp-for="confirmarSenha"/>
+                        @Html.ValidationMessageFor(x => x.confirmarSenha)
                     </div>
                 </div>
-                <div class="row">
-                     <div class="col-md-12 d-flex justify-content-center">
-                    <button id="btn-usuario" type="button"  class="btn btn-warning btn-outline-primary" >Cadastrar</button>
+                <div class="form-group">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-warning btn-outline-primary" id="ovBTN_login">Cadastrar</button>
                 </div>
  @if (TempData["MensagemErro"] != null)
 {
@@ -59,8 +62,8 @@
         @TempData["MensagemErro"]
     </div>
 }
+                </div>
             </div>
         </div>
-    </div>
     
 </form>

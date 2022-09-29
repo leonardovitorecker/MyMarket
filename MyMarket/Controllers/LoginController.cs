@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyMarket.Database;
+using MyMarket.Helper;
 using MyMarket.Models;
 
 namespace MyMarket.Controllers
@@ -10,15 +11,23 @@ namespace MyMarket.Controllers
 
 
         private readonly Context _bancocontext;
-
-        public LoginController(Context context)
+        private readonly ISessao _sessao;
+        public LoginController(Context context, ISessao sessao)
         {
             _bancocontext = context;
+            _sessao = sessao;
         }
         // GET: LoginController
         public ActionResult Index()
         {
             return View();
+        }
+        public IActionResult Sair()
+        {
+            _sessao.RemoverSessaoUsuario();
+
+            return RedirectToAction("Index", "Login");
+
         }
 
         // GET: LoginController/Details/5
@@ -32,6 +41,7 @@ namespace MyMarket.Controllers
         {
             return View();
         }
+
         public Usuario BuscarLogin(string email)
         {
             return _bancocontext.usuarios.FirstOrDefault(user => user.email == email);
@@ -49,28 +59,29 @@ namespace MyMarket.Controllers
                 if (ModelState.IsValid)
                 {
                     Usuario usuario = BuscarLogin(loginUsuario.email);
-                    loginUsuario.SetSenhaHash();
+                    
 
                     if (usuario != null)
                     {
+                        loginUsuario.SetSenhaHash();
                         if (usuario.SenhaValida(loginUsuario.senha))
                         {
-
+                           
                             return RedirectToAction("Index", "Home");
                         }
                         else TempData["MensagemErro"] = $"Senha do usuário inválida. Por favor, tente novamente.";
-                        return View();
+                        return RedirectToAction("Create", "Login");
                     }
                     else TempData["MensagemErro"] = $"Usuário ou senha  invalido. Por favor, tente novamente.";
-                    return View();
+                    return RedirectToAction("Create", "Login");
                 }
 
-                return RedirectToAction("Index", "Privacy");
+                return RedirectToAction("Create", "Login");
             }
             catch (Exception erro)
             {
                 TempData["MensagemErro"] = $"Ops, não conseguimos realizar seu login, tente novamante, detalhe do erro:";
-                return RedirectToAction("Entrar");
+                return RedirectToAction("Create", "Login");
             }
 
         }

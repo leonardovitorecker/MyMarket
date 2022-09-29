@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220907142225_mymrke")]
-    partial class mymrke
+    [Migration("20220928220110_mymarket")]
+    partial class mymarket
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,9 +196,6 @@ namespace MyMarket.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("itemPedidoProdutoid")
-                        .HasColumnType("integer");
-
                     b.Property<string>("nomeProduto")
                         .IsRequired()
                         .HasColumnType("text");
@@ -212,8 +209,6 @@ namespace MyMarket.Migrations
 
                     b.HasIndex("estoqueid");
 
-                    b.HasIndex("itemPedidoProdutoid");
-
                     b.ToTable("produtos");
                 });
 
@@ -225,8 +220,11 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<string>("cpf")
+                    b.Property<string>("confirmarSenha")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("cpf")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("dataAlteracao")
@@ -298,14 +296,6 @@ namespace MyMarket.Migrations
                         .HasForeignKey("estoqueid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("MyMarket.Models.ItemPedidoProduto", "ItemPedidoProduto")
-                        .WithMany()
-                        .HasForeignKey("itemPedidoProdutoid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ItemPedidoProduto");
 
                     b.Navigation("categoria");
 
