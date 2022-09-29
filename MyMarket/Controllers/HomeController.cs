@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyMarket.Database;
 using MyMarket.Models;
 using System.Diagnostics;
 
@@ -7,15 +9,35 @@ namespace MyMarket.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Context _bancocontext;
+        
+       
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Context context)
         {
             _logger = logger;
+            _bancocontext = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string searchstring)
         {
-            return View();
+
+            var produto = (from p in _bancocontext.produtos
+                           join e in _bancocontext.estoques on p.estoqueid equals e.id
+                           select new DtoProduto
+                           {
+                               id = p.id,
+                               nomeProduto = p.nomeProduto,
+                               valorVenda = p.valorVenda,
+                               estoque = e.estoqueAtual
+                           });
+
+            if (!String.IsNullOrEmpty(searchstring))
+            {
+                produto = produto.Where(s => s.nomeProduto.Contains(searchstring));
+            }
+
+            return View(await produto.ToListAsync());
         }
 
         public IActionResult Privacy()

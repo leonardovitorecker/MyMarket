@@ -227,7 +227,7 @@ namespace MyMarket.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
 
-                        .HasColumnType("text");
+              
 
                     b.Property<string>("cpf")
                         .HasColumnType("text");
