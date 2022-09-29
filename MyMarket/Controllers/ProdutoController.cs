@@ -21,26 +21,7 @@ namespace MyMarket.Controllers
             webHostEnvironment = hostEnvironment;
         }
 
-      public async Task<IActionResult> BuscaProdutos(string searchstring)
-        {
-
-            var produto = (from p in _bancocontext.produtos
-                           join e in _bancocontext.estoques on p.estoqueid equals e.id
-                           select new DtoProduto
-                           {
-                               id = p.id,
-                               nomeProduto = p.nomeProduto,
-                               valorVenda = p.valorVenda,
-                               estoque = e.estoqueAtual
-                           });
-
-            if (!String.IsNullOrEmpty(searchstring))
-            {
-                produto = produto.Where(s => s.nomeProduto.Contains(searchstring));
-            }
-
-            return View(await produto.ToListAsync());
-        }
+    
         // GET: Chamada
         public async Task<IActionResult> Index()
         {
