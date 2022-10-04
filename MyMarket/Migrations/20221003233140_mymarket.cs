@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MyMarket.Migrations
 {
-    public partial class MyMarket : Migration
+    public partial class mymarket : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,7 @@ namespace MyMarket.Migrations
                     email = table.Column<string>(type: "text", nullable: false),
                     nome = table.Column<string>(type: "text", nullable: false),
                     senha = table.Column<string>(type: "text", nullable: false),
+                    confirmarSenha = table.Column<string>(type: "text", nullable: false),
                     cpf = table.Column<string>(type: "text", nullable: true),
                     telefone = table.Column<string>(type: "text", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -49,9 +50,11 @@ namespace MyMarket.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nomeProduto = table.Column<string>(type: "text", nullable: false),
-                    arquivo = table.Column<byte[]>(type: "bytea", nullable: false),
-                    imagem = table.Column<string>(type: "text", nullable: false),
+                    arquivo = table.Column<byte[]>(type: "bytea", nullable: true),
+                    imagem = table.Column<string>(type: "text", nullable: true),
                     valorVenda = table.Column<decimal>(type: "numeric", nullable: false),
+                    estoqueAtual = table.Column<int>(type: "integer", nullable: false),
+                    estoqueAnterior = table.Column<int>(type: "integer", nullable: true),
                     categoriaid = table.Column<int>(type: "integer", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     dataAlteracao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -117,29 +120,6 @@ namespace MyMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "estoques",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    estoqueAtual = table.Column<int>(type: "integer", nullable: false),
-                    idproduto = table.Column<int>(type: "integer", nullable: false),
-                    Produtoid = table.Column<int>(type: "integer", nullable: false),
-                    dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    dataAlteracao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_estoques", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_estoques_produtos_Produtoid",
-                        column: x => x.Produtoid,
-                        principalTable: "produtos",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "itempedidosprodutos",
                 columns: table => new
                 {
@@ -169,11 +149,6 @@ namespace MyMarket.Migrations
                 column: "usuarioid");
 
             migrationBuilder.CreateIndex(
-                name: "IX_estoques_Produtoid",
-                table: "estoques",
-                column: "Produtoid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_itempedidosprodutos_Pedidoid",
                 table: "itempedidosprodutos",
                 column: "Pedidoid");
@@ -193,9 +168,6 @@ namespace MyMarket.Migrations
         {
             migrationBuilder.DropTable(
                 name: "enderecos");
-
-            migrationBuilder.DropTable(
-                name: "estoques");
 
             migrationBuilder.DropTable(
                 name: "itempedidosprodutos");
