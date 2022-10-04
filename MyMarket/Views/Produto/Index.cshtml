@@ -47,6 +47,9 @@
              <td>
                 @Html.DisplayFor(modelItem => item.categoria)
             </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.estoque)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning">Editar</a>
                 <a asp-action="Details" asp-route-id="@item.id" class="btn btn-info">Detalhes</a> 

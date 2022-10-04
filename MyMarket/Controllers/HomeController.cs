@@ -23,13 +23,14 @@ namespace MyMarket.Controllers
         {
 
             var produto = (from p in _bancocontext.produtos
-                           join e in _bancocontext.estoques on p.estoqueid equals e.id
+                         
                            select new DtoProduto
                            {
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
-                               estoque = e.estoqueAtual
+                               estoque = p.estoqueAtual,
+                               imagem = p.imagem,
                            });
 
             if (!String.IsNullOrEmpty(searchstring))
@@ -38,6 +39,23 @@ namespace MyMarket.Controllers
             }
 
             return View(await produto.ToListAsync());
+        }
+
+        public async Task<IActionResult> ProdutoExpandido(int? id)
+        {
+            if (id == null || _bancocontext.produtos == null)
+            {
+                return NotFound();
+            }
+
+            var Produto = await _bancocontext.produtos
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (Produto == null)
+            {
+                return NotFound();
+            }
+
+            return View(Produto);
         }
 
         public IActionResult Privacy()

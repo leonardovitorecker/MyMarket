@@ -33,7 +33,8 @@ namespace MyMarket.Controllers
                                                nomeProduto = p.nomeProduto,
                                                imagem = p.imagem,
                                                valorVenda = p.valorVenda,
-                                               categoria = c.nome
+                                               categoria = c.nome,
+                                               estoque = p.estoqueAtual
                                            }).ToList();
 
             return View(lista);
@@ -64,17 +65,18 @@ namespace MyMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nomeProduto,imagem,arquivo,valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
+        public async Task<IActionResult> Create([Bind("id,nomeProduto,imagem,arquivo,estoqueAtual, valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
         {
             if (ModelState.IsValid)
             {
                 IFormFile imagemEnviada = arquivo;
-                if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+                if (imagemEnviada == null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
                 {
                     MemoryStream ms = new MemoryStream();
                     imagemEnviada.OpenReadStream().CopyTo(ms);
                     Produto.arquivo = ms.ToArray();
                     Produto.imagem = imagemEnviada.FileName;
+                    
                 }              
 
                 _bancocontext.Add(Produto);
