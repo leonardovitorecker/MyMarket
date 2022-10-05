@@ -65,9 +65,6 @@ namespace MyMarket.Migrations
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("idUsuario")
-                        .HasColumnType("integer");
-
                     b.Property<int>("numeroCasa")
                         .HasColumnType("integer");
 
@@ -207,7 +204,6 @@ namespace MyMarket.Migrations
 
                     b.HasIndex("categoriaid");
 
-
                     b.ToTable("produtos");
                 });
 
@@ -219,8 +215,9 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-
-              
+                    b.Property<string>("confirmarSenha")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("cpf")
                         .HasColumnType("text");
@@ -254,13 +251,11 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Endereco", b =>
                 {
-                    b.HasOne("MyMarket.Models.Usuario", "usuario")
+                    b.HasOne("MyMarket.Models.Usuario", null)
                         .WithMany("enderecos")
                         .HasForeignKey("usuarioid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>
@@ -288,7 +283,6 @@ namespace MyMarket.Migrations
                         .HasForeignKey("categoriaid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>

@@ -67,6 +67,13 @@ body {
     --bs-btn-active-bg: #white;
 }
 
+#btn-add {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: right;
+}
+
 .txtlogin {
     top: 100%;
     right: 100%;

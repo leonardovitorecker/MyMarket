@@ -15,8 +15,7 @@ namespace MyMarket.Models
         public string rua { get; set; }
         public int numeroCasa { get; set; }
         public string? complemento { get; set; }
-        public int idUsuario { get; set; }
-        public Usuario usuario { get; set; }
+        public int usuarioid { get; set; }
         public DateTime dataAlteracao { get; set; } = DateTime.Now;
     }
 }

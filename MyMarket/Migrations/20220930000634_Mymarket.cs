@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MyMarket.Migrations
 {
-    public partial class MyMarket : Migration
+    public partial class Mymarket : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -48,6 +48,7 @@ namespace MyMarket.Migrations
                     email = table.Column<string>(type: "text", nullable: false),
                     nome = table.Column<string>(type: "text", nullable: false),
                     senha = table.Column<string>(type: "text", nullable: false),
+                    confirmarSenha = table.Column<string>(type: "text", nullable: false),
                     cpf = table.Column<string>(type: "text", nullable: true),
                     telefone = table.Column<string>(type: "text", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -95,7 +96,6 @@ namespace MyMarket.Migrations
                     rua = table.Column<string>(type: "text", nullable: false),
                     numeroCasa = table.Column<int>(type: "integer", nullable: false),
                     complemento = table.Column<string>(type: "text", nullable: true),
-                    idUsuario = table.Column<int>(type: "integer", nullable: false),
                     usuarioid = table.Column<int>(type: "integer", nullable: false),
                     dataAlteracao = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

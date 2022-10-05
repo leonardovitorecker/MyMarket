@@ -23,13 +23,12 @@ namespace MyMarket.Controllers
         {
 
             var produto = (from p in _bancocontext.produtos
-                           join e in _bancocontext.estoques on p.estoqueid equals e.id
                            select new DtoProduto
                            {
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
-                               estoque = e.estoqueAtual
+                              
                            });
 
             if (!String.IsNullOrEmpty(searchstring))
