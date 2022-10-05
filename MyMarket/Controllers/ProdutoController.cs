@@ -33,7 +33,7 @@ namespace MyMarket.Controllers
                                                nomeProduto = p.nomeProduto,
                                                imagem = p.imagem,
                                                valorVenda = p.valorVenda,
-                                               categoria = c.nome,
+                                               nomecategoria = c.nome,
                                                estoque = p.estoqueAtual
                                            }).ToList();
 
@@ -47,19 +47,28 @@ namespace MyMarket.Controllers
                 return NotFound();
             }
 
-            var Produto = await _bancocontext.produtos
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (Produto == null)
+            var dbProduto = (from p in _bancocontext.produtos
+                             join c in _bancocontext.categorias on p.categoriaid equals c.id
+                             select new DtoProduto
+                             {
+                                 id = p.id,
+                                 nomeProduto = p.nomeProduto,
+                                 imagem = p.imagem,
+                                 valorVenda = p.valorVenda,
+                                 nomecategoria = c.nome,
+                                 estoque = p.estoqueAtual
+                             }).FirstOrDefault();
+            if (dbProduto == null)
             {
                 return NotFound();
             }
 
-            return View(Produto);
+            return View(dbProduto);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Categoria2 = new SelectList(_bancocontext.categorias, "id", "nome");
+            ViewBag.Categoria1 = new SelectList(_bancocontext.categorias, "id", "nome");
             return View();
         }
 
@@ -93,17 +102,29 @@ namespace MyMarket.Controllers
             {
                 return NotFound();
             }
+            var dbProduto = (from p in _bancocontext.produtos
+                             join c in _bancocontext.categorias on p.categoriaid equals c.id
+                             select new DtoProduto
+                             {
+                                 id = p.id,
+                                 nomeProduto = p.nomeProduto,
+                                 imagem = p.imagem,
+                                 valorVenda = p.valorVenda,
+                                 nomecategoria = c.nome,
+                                 estoque = p.estoqueAtual,
+                                 categoriaid = p.categoriaid
+                             }).FirstOrDefault();
 
-            var Produto = await _bancocontext.produtos.FindAsync(id);
-            if (Produto == null)
+           
+            if (dbProduto == null)
             {
                 return NotFound();
             }
-            return View(Produto);
+            return View(dbProduto);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,idestoque,idcategoria,dataCadastro,dataAlteracao")] Produto Produto)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,estoque,nomecategoria, arquivo, categoriaid, dataAlteracao")] Produto Produto)
         {
             if (id != Produto.id)
             {
@@ -112,6 +133,7 @@ namespace MyMarket.Controllers
 
             if (ModelState.IsValid)
             {
+               
                 try
                 {
                     _bancocontext.Update(Produto);
@@ -141,14 +163,23 @@ namespace MyMarket.Controllers
                 return NotFound();
             }
 
-            var Produto = await _bancocontext.produtos
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (Produto == null)
+            var dbProduto = (from p in _bancocontext.produtos
+                             join c in _bancocontext.categorias on p.categoriaid equals c.id
+                             select new DtoProduto
+                             {
+                                 id = p.id,
+                                 nomeProduto = p.nomeProduto,
+                                 imagem = p.imagem,
+                                 valorVenda = p.valorVenda,
+                                 nomecategoria = c.nome,
+                                 estoque = p.estoqueAtual
+                             }).FirstOrDefault();
+            if (dbProduto == null)
             {
                 return NotFound();
             }
 
-            return View(Produto);
+            return View(dbProduto);
         }
 
         // POST: Chamada/Delete/5
