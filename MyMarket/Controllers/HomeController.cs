@@ -40,7 +40,8 @@ namespace MyMarket.Controllers
 
             return View(await produto.ToListAsync());
         }
-
+        [HttpGet]
+     
         public async Task<IActionResult> ProdutoExpandido(int? id)
         {
             if (id == null || _bancocontext.produtos == null)
