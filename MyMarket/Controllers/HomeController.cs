@@ -28,7 +28,9 @@ namespace MyMarket.Controllers
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
-                              
+
+                               estoque = p.estoqueAtual,
+                               imagem = p.imagem,
                            });
 
             if (!String.IsNullOrEmpty(searchstring))
@@ -37,6 +39,24 @@ namespace MyMarket.Controllers
             }
 
             return View(await produto.ToListAsync());
+        }
+        [HttpGet]
+     
+        public async Task<IActionResult> ProdutoExpandido(int? id)
+        {
+            if (id == null || _bancocontext.produtos == null)
+            {
+                return NotFound();
+            }
+
+            var Produto = await _bancocontext.produtos
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (Produto == null)
+            {
+                return NotFound();
+            }
+
+            return View(Produto);
         }
 
         public IActionResult Privacy()

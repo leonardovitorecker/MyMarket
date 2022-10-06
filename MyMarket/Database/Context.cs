@@ -17,7 +17,6 @@ namespace MyMarket.Database
             public DbSet<Endereco> enderecos { get; set; }
             public DbSet<Produto> produtos { get; set; }
             public DbSet<Categoria> categorias { get; set; }
-            public DbSet<Estoque> estoques { get; set; }
             public DbSet<ItemPedidoProduto> itempedidosprodutos { get; set; }
             public DbSet<Pedido> pedidos { get; set; }
              

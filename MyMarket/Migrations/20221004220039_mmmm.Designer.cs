@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMarket.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221004220039_mmmm")]
+    partial class mmmm
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,6 +66,9 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("idUsuario")
+                        .HasColumnType("integer");
 
                     b.Property<int>("numeroCasa")
                         .HasColumnType("integer");
@@ -232,11 +237,13 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Endereco", b =>
                 {
-                    b.HasOne("MyMarket.Models.Usuario", null)
+                    b.HasOne("MyMarket.Models.Usuario", "usuario")
                         .WithMany("enderecos")
                         .HasForeignKey("usuarioid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>

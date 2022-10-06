@@ -1,41 +1,40 @@
-﻿@model IEnumerable<MyMarket.Models.DtoProduto>
+@model IEnumerable<MyMarket.Models.DtoProduto>
 @{
     ViewData["Title"] = "Home Page";
 }
  
-    <tbody>
+   
         @foreach (var item in Model)
         {
             <div class= "row">          
             <div class="col-3">
-                <div class="card"> 
-                     <a href="@Url.Action("Privacy")">
-                     <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.arquivo)
+                <div class="card">
+                     <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.imagem)
                          <rect width="100%" height="100%" fill="#55595c"></rect></svg>
-                         </a>
-                        <div class="card-body"> 
+                        <div class="card-body">
                             <div class="col">
                                 <div class="card-body">
                                        <div>
                                         @Html.DisplayFor(modelItem => item.nomeProduto)</div>                                      
-                                              <div>R$
+                                              <div>
                                              @Html.DisplayFor(modelItem => item.valorVenda)</div>
-                                              <div>Quantidade em estoque:
+                                              <div>
                                               @Html.DisplayFor(modelItem => item.estoque)</div>
                                        </div>   
 
                                 </div>
                                 <div>
-                                      <a asp-action="Privacy" asp-route-id="@item.id" id="btn-add" class="btn btn-warning">adicionar ao carrinho</a>
+               
+                                  <a asp-action="ProdutoExpandido" asp-route-id="@item.id" class="btn btn-danger">Ver mais</a>
                                 </div>
                             </div>
                         </div>
 
                 </div> 
                 </div>
-            }
-    </tbody>
-</table>
-</div>
-</div> 
+               
+        }
+
+
+
 
