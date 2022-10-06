@@ -31,7 +31,7 @@ namespace MyMarket.Controllers
                                            {
                                                id = p.id,
                                                nomeProduto = p.nomeProduto,
-                                               imagem = p.imagem,
+                                               arquivo = p.arquivo,
                                                valorVenda = p.valorVenda,
                                                nomecategoria = c.nome,
                                                estoque = p.estoqueAtual

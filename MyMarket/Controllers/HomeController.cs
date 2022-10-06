@@ -23,12 +23,12 @@ namespace MyMarket.Controllers
         {
 
             var produto = (from p in _bancocontext.produtos
-                         
                            select new DtoProduto
                            {
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
+
                                estoque = p.estoqueAtual,
                                imagem = p.imagem,
                            });
