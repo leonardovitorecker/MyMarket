@@ -74,9 +74,21 @@ body {
     text-align: right;
 }
 
+#btn-addcarrinho {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: right;
+}
+
 .txtlogin {
     top: 100%;
     right: 100%;
     padding: 60px;
     border-radius: 15px;
+}
+
+.nav {
+    display: inline;
+    float: left;
 }

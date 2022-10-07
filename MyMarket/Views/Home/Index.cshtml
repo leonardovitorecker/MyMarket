@@ -4,36 +4,38 @@
 }
  
    
-        @foreach (var item in Model)
-        {
-            <div class= "row">          
+        
+            <div class= "row">  
+             @foreach (var item in Model)
+            {
             <div class="col-3">
                 <div class="card">
-                     <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.imagem)
-                         <rect width="100%" height="100%" fill="#55595c"></rect></svg>
+                    <a asp-action="ProdutoExpandido" asp-route-id="@item.id">
+                     <svg> class="bd-placeholder-img card-img-top" width="100px height="250" xmlns= @Html.DisplayFor(modelItem => item.imagem)
+                         <rect width=260px height="100%" fill="#55595c"></rect></svg>
+                         </a>
                         <div class="card-body">
                             <div class="col">
                                 <div class="card-body">
                                        <div>
                                         @Html.DisplayFor(modelItem => item.nomeProduto)</div>                                      
-                                              <div>
+                                              <div>R$
                                              @Html.DisplayFor(modelItem => item.valorVenda)</div>
-                                              <div>
+                                              <div>Quantidade em estoque:
                                               @Html.DisplayFor(modelItem => item.estoque)</div>
                                        </div>   
 
                                 </div>
-                                <div>
-               
-                                  <a asp-action="ProdutoExpandido" asp-route-id="@item.id" class="btn btn-danger">Ver mais</a>
-                                </div>
+
+                                <button type="button" id = "btn-add" class="btn btn-warning">ADICIONAR AO CARRINHO</button>
                             </div>
                         </div>
 
                 </div> 
+                }
                 </div>
                
-        }
+        
 
 
 

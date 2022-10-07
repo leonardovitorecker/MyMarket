@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221004220039_mmmm")]
-    partial class mmmm
+    [Migration("20221006001450_mymarket")]
+    partial class mymarket
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,9 +66,6 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("idUsuario")
-                        .HasColumnType("integer");
 
                     b.Property<int>("numeroCasa")
                         .HasColumnType("integer");
@@ -237,13 +234,11 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Endereco", b =>
                 {
-                    b.HasOne("MyMarket.Models.Usuario", "usuario")
+                    b.HasOne("MyMarket.Models.Usuario", null)
                         .WithMany("enderecos")
                         .HasForeignKey("usuarioid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>

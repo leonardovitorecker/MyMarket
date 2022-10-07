@@ -6,7 +6,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="style.css" />
         
-        <h1 id="text-produto">Cadastro</h1>
         <div class="album py-5 bg-light">
                 <div class="container">
                 <!--Linha Para descer o produto-->
@@ -14,10 +13,10 @@
                     <!--Imagem do Produto-->
                     <div class="col">
                       <div class="card shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> 
+                        <svg class="bd-placeholder-img card-img-top" width="500%" height="300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> 
                       </div>
-                      <div >
-                       @Html.DisplayFor(model => model.estoqueAtual) disponiveis
+                      <div>Unidades Disponiveis:
+                        @Html.DisplayFor(model => model.estoqueAtual) 
                         </div>
                     </div>
                     
@@ -48,7 +47,7 @@
                             
                             <div class="row">
                               <div class="col-md-12 d-flex justify-content-center">
-                                <button id="btn-addcarrinho" type="button"  class="btn">Adicionar ao Carrinho</button>
+                                <button id="btn-addcarrinho" type="button"  class="btn btn-warning">ADICIONAR AO CARRINHO</button>
                               </div>
                             </div>
                       </div>
