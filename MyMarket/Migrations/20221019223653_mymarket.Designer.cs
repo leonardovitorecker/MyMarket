@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220929000206_MyMarket")]
-    partial class MyMarket
+    [Migration("20221019223653_mymarket")]
+    partial class mymarket
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,6 @@ namespace MyMarket.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<byte[]>("arquivo")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<int>("categoriaid")
@@ -202,7 +201,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("imagem")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("nomeProduto")

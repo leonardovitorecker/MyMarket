@@ -92,7 +92,9 @@ namespace MyMarket.Controllers
                 return NotFound();
             }
             return View(Produto);
+
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,idestoque,idcategoria,dataCadastro,dataAlteracao")] Produto Produto)
@@ -101,7 +103,6 @@ namespace MyMarket.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try

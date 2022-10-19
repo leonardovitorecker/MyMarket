@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MyMarket.Migrations
 {
-    public partial class MyMarket : Migration
+    public partial class mymarket : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,8 +49,8 @@ namespace MyMarket.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nomeProduto = table.Column<string>(type: "text", nullable: false),
-                    arquivo = table.Column<byte[]>(type: "bytea", nullable: false),
-                    imagem = table.Column<string>(type: "text", nullable: false),
+                    arquivo = table.Column<byte[]>(type: "bytea", nullable: true),
+                    imagem = table.Column<string>(type: "text", nullable: true),
                     valorVenda = table.Column<decimal>(type: "numeric", nullable: false),
                     categoriaid = table.Column<int>(type: "integer", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),

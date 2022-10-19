@@ -29,7 +29,7 @@
                 @*<text>Local</text> @Html.DropDownList("Categoria", new SelectList(ViewBag.Categoria))*@
                 @*Razor*@
                 <select asp-items=@ViewBag.Categoria2 asp-for="categoriaid" class="form-control"></select>
-            </div>
+            </div> 
             <div class="form-group">
                 <label asp-for="valorVenda" class="control-label">Valor de venda</label>
                 <input asp-for="valorVenda" class="form-control" />

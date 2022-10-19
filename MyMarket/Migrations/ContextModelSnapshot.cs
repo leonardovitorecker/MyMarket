@@ -187,7 +187,6 @@ namespace MyMarket.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
                     b.Property<byte[]>("arquivo")
-                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<int>("categoriaid")
@@ -200,7 +199,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("imagem")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("nomeProduto")
