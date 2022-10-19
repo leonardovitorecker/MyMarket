@@ -9,8 +9,11 @@
             <div class= "row">          
             <div class="col-3">
                 <div class="card">
+                     <a asp-action="ProdutoExpandido" asp-route-id="@item.id" >
                      <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.imagem)
                          <rect width="100%" height="100%" fill="#55595c"></rect></svg>
+                         </a>
+
                         <div class="card-body">
                             <div class="col">
                                 <div class="card-body">
@@ -26,6 +29,8 @@
                                 <div>
                
                                   <a asp-action="ProdutoExpandido" asp-route-id="@item.id" class="btn btn-danger">Ver mais</a>
+                                  <p class="button"> @Html.ActionLink("Add tocart", "AddCarrinho", "CarrinhoCompras", new { id = item.id }, "")
+                                </p>
                                 </div>
                             </div>
                         </div>

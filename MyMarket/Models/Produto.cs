@@ -18,5 +18,6 @@ namespace MyMarket.Models
         public int categoriaid { get; set; }
         public DateTime dataCadastro { get; set; } = DateTime.Now;
         public DateTime dataAlteracao { get; set; } = DateTime.Now;
+        public  virtual ICollection<Carrinho>? carrinhos { get; set; }
     }
 }
