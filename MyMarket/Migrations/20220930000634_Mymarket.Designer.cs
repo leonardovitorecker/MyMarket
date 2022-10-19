@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMarket.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220930000634_Mymarket")]
+    partial class Mymarket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,6 +82,31 @@ namespace MyMarket.Migrations
                     b.HasIndex("usuarioid");
 
                     b.ToTable("enderecos");
+                });
+
+            modelBuilder.Entity("MyMarket.Models.Estoque", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("dataAlteracao")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("dataCadastro")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("estoqueAtual")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("produtoid")
+                        .HasColumnType("integer");
+
+                    b.HasKey("id");
+
+                    b.ToTable("estoques");
                 });
 
             modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>
@@ -164,12 +191,6 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("estoqueAnterior")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("estoqueAtual")
-                        .HasColumnType("integer");
 
                     b.Property<string>("imagem")
                         .HasColumnType("text");

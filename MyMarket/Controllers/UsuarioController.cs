@@ -43,16 +43,21 @@ namespace MyMarket.Controllers
                     {
                         if (usuario.IsValidEmail(usuario.email) == true)
                         {
-                           
+                            if (usuario.senha == usuario.confirmarSenha)
+                            {
+                                usuario.SetSenhaHash();
                                 _bancocontext.usuarios.Add(usuario);
                                 _bancocontext.SaveChanges();
                                 return RedirectToAction("Index", "Home");
-                         }
-                            else  TempData["MensagemErro"] = $"Email nao é valido";
-                             return View();
+                            }
+                            else TempData["MensagemErro"] = $"Senhas não coicidem";
+                            return RedirectToAction("Create", "Usuario");
                         }
+                            else  TempData["MensagemErro"] = $"Email nao é valido";
+                        return RedirectToAction("Create", "Usuario");
+                    }
                          TempData["MensagemErro"] = $"Username ja existe";
-                    return View();
+                    return RedirectToAction("Create", "Usuario");
                 }
              else   return RedirectToAction("Index","Home");
             }
