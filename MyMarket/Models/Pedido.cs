@@ -9,9 +9,8 @@ namespace MyMarket.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
-        public int idUsuario { get; set; }
-        public Usuario usuario { get; set; }
-        public ICollection<ItemPedidoProduto> produtos { get; set; }
+        public int usuarioid { get; set; }
+        public int produtoid { get; set; }
         public decimal valorTotal { get; set; }
         public DateTime dataCadastro { get; set; } = DateTime.Now;
     }

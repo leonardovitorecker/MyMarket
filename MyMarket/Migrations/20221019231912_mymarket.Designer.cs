@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221019223653_mymarket")]
+    [Migration("20221019231912_mymarket")]
     partial class mymarket
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,9 +125,6 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<int?>("Pedidoid")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("dataAlteracao")
                         .HasColumnType("timestamp with time zone");
 
@@ -148,8 +145,6 @@ namespace MyMarket.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Pedidoid");
-
                     b.ToTable("itempedidosprodutos");
                 });
 
@@ -164,7 +159,7 @@ namespace MyMarket.Migrations
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("idUsuario")
+                    b.Property<int>("produtoid")
                         .HasColumnType("integer");
 
                     b.Property<int>("usuarioid")
@@ -277,22 +272,13 @@ namespace MyMarket.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("MyMarket.Models.ItemPedidoProduto", b =>
-                {
-                    b.HasOne("MyMarket.Models.Pedido", null)
-                        .WithMany("produtos")
-                        .HasForeignKey("Pedidoid");
-                });
-
             modelBuilder.Entity("MyMarket.Models.Pedido", b =>
                 {
-                    b.HasOne("MyMarket.Models.Usuario", "usuario")
+                    b.HasOne("MyMarket.Models.Usuario", null)
                         .WithMany("pedidos")
                         .HasForeignKey("usuarioid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("usuario");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Produto", b =>
@@ -305,11 +291,6 @@ namespace MyMarket.Migrations
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
-                {
-                    b.Navigation("produtos");
-                });
-
-            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
                 {
                     b.Navigation("produtos");
                 });

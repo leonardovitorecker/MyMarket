@@ -1,0 +1,52 @@
+﻿@model MyMarket.Models.Pedido
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Pedido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="usuarioid" class="control-label"></label>
+                @*HtmlHelpers*@
+                @*<text>Usuario</text> @Html.DropDownList("Usuario", new SelectList(ViewBag.Usuario))*@
+                @*Razor*@
+                <select asp-items=@ViewBag.Usuario2 asp-for="usuarioid" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="produtoid" class="control-label"></label>
+                @*HtmlHelpers*@
+                @*<text>Produto</text> @Html.DropDownList("Produto", new SelectList(ViewBag.Produto))*@
+                @*Razor*@
+                <select asp-items=@ViewBag.Produto2 asp-for="produtoid" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="valorTotal" class="control-label"></label>
+                <input asp-for="valorTotal" class="form-control" />
+                <span asp-validation-for="valorTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dataCadastro" class="control-label"></label>
+                <input asp-for="dataCadastro" class="form-control" />
+                <span asp-validation-for="dataCadastro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
