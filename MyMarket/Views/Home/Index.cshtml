@@ -3,15 +3,17 @@
     ViewData["Title"] = "Home Page";
 }
  
-   
-        @foreach (var item in Model)
-        {
+    <tbody>
+       
             <div class= "row">          
             <div class="col-3">
-                <div class="card">
-                     <a asp-action="ProdutoExpandido" asp-route-id="@item.id" >
-                     <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.imagem)
-                         <rect width="100%" height="100%" fill="#55595c"></rect></svg>
+                 @foreach (var item in Model)
+                {
+                <div class="card"> 
+                     <a href="@Url.Action("Privacy")">
+                     <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.arquivo)
+                         <rect width=260px height="100%" fill="#55595c"></rect></svg>
+
                          </a>
 
                         <div class="card-body">
@@ -33,13 +35,14 @@
                                 </p>
                                 </div>
                             </div>
-                        </div>
-
-                </div> 
+                        </div>                
+            }
+            </div> 
                 </div>
-               
-        }
+    </tbody>
+</table>
+</div>
+</div> 
 
-
-
+ 
 
