@@ -4,14 +4,15 @@
 }
  
     <tbody>
-        @foreach (var item in Model)
-        {
+       
             <div class= "row">          
             <div class="col-3">
+                 @foreach (var item in Model)
+                {
                 <div class="card"> 
                      <a href="@Url.Action("Privacy")">
                      <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.arquivo)
-                         <rect width="100%" height="100%" fill="#55595c"></rect></svg>
+                         <rect width=260px height="100%" fill="#55595c"></rect></svg>
                          </a>
                         <div class="card-body"> 
                             <div class="col">
@@ -29,11 +30,10 @@
                                       <a asp-action="Privacy" asp-route-id="@item.id" id="btn-add" class="btn btn-warning">adicionar ao carrinho</a>
                                 </div>
                             </div>
-                        </div>
-
-                </div> 
-                </div>
+                        </div>                
             }
+            </div> 
+                </div>
     </tbody>
 </table>
 </div>

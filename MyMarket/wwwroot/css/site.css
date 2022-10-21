@@ -80,3 +80,8 @@ body {
     padding: 60px;
     border-radius: 15px;
 }
+
+.navsearsh {
+    display: inline;
+    float: left;
+}
