@@ -1,4 +1,5 @@
-﻿using MyMarket.Models;
+﻿using Microsoft.AspNetCore.Http;
+using MyMarket.Models;
 using Newtonsoft.Json;
 
 namespace MyMarket.Helper
@@ -6,7 +7,7 @@ namespace MyMarket.Helper
     public class Sessao : ISessao
     {
         private readonly IHttpContextAccessor _httpContext;
-
+        
         public Sessao(IHttpContextAccessor httpContext)
         {
             _httpContext = httpContext;
@@ -15,6 +16,7 @@ namespace MyMarket.Helper
         public Usuario BuscarSessaoDoUsuario()
         {
             string sessaoUsuario = _httpContext.HttpContext.Session.GetString("sessaoUsuarioLogado");
+            
 
             if (string.IsNullOrEmpty(sessaoUsuario)) return null;
 
@@ -32,5 +34,9 @@ namespace MyMarket.Helper
         {
             _httpContext.HttpContext.Session.Remove("sessaoUsuarioLogado");
         }
+
+      
+
+       
     }
 }

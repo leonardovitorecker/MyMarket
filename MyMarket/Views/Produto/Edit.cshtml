@@ -1,4 +1,4 @@
-﻿@model MyMarket.Models.Produto
+﻿@model MyMarket.Models.DtoProduto
 
 @{
     ViewData["Title"] = "Edit";
@@ -19,16 +19,13 @@
                 <span asp-validation-for="nomeProduto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="valorVenda" class="control-label">Valor de venda</label>
-                <input asp-for="valorVenda" class="form-control" />
-                <span asp-validation-for="valorVenda" class="text-danger"></span>
+                <label asp-for="estoque" class="control-label">Estoque</label>
+                <input asp-for="estoque" class="form-control" />
+                <span asp-validation-for="estoque" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="categoriaid" class="control-label">Categoria</label>
-                @*HtmlHelpers*@
-                @*<text>Local</text> @Html.DropDownList("Categoria", new SelectList(ViewBag.Categoria))*@
-                @*Razor*@
-                <select asp-items=@ViewBag.Categoria2 asp-for="categoriaid" class="form-control"></select>
+             <div class="card-body md-3" style="border-color:darkgoldenrod">
+                <select  asp-items=@ViewBag.categoria2 nome="nomecategoria" asp-for="categoriaid"
+                class="form-control"><option value="0">selecione a categoria</option> </select>
             </div>
             <div class="form-group">
                 <label asp-for="valorVenda" class="control-label">Valor de venda</label>
