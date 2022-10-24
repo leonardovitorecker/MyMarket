@@ -1,4 +1,4 @@
-﻿@model MyMarket.Models.DtoProduto
+﻿@model MyMarket.Models.Produto
 
 @{
     ViewData["Title"] = "Delete";
@@ -31,22 +31,24 @@
         </dd>
       
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nomecategoria)
+            @Html.DisplayNameFor(model => model.categoriaid)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.nomecategoria)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.estoque)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.estoque)
+            @Html.DisplayFor(model => model.categoriaid)
         </dd>
        
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.dataCadastro)
         </dt>
-
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataCadastro)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataAlteracao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataAlteracao)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

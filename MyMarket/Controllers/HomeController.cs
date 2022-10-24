@@ -28,8 +28,6 @@ namespace MyMarket.Controllers
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
-
-                               estoque = p.estoqueAtual,
                                imagem = p.imagem,
                            });
 

@@ -1,5 +1,4 @@
-
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyMarket.Database;
@@ -9,10 +8,6 @@ namespace MyMarket.Controllers
 {
     public class ProdutoController : Controller
     {
-
-   
-    
-
         private readonly Context _bancocontext;
         private readonly IWebHostEnvironment webHostEnvironment;
         public ProdutoController(Context context, IWebHostEnvironment hostEnvironment)
@@ -21,21 +16,19 @@ namespace MyMarket.Controllers
             webHostEnvironment = hostEnvironment;
         }
 
-    
         // GET: Chamada
         public async Task<IActionResult> Index()
         {
             List<DtoProduto> lista = (from p in _bancocontext.produtos
                                       join c in _bancocontext.categorias on p.categoriaid equals c.id
-                                           select new DtoProduto
-                                           {
-                                               id = p.id,
-                                               nomeProduto = p.nomeProduto,
-                                               arquivo = p.arquivo,
-                                               valorVenda = p.valorVenda,
-                                               nomecategoria = c.nome,
-                                               estoque = p.estoqueAtual
-                                           }).ToList();
+                                      select new DtoProduto
+                                      {
+                                          id = p.id,
+                                          nomeProduto = p.nomeProduto,
+                                          imagem = p.imagem,
+                                          valorVenda = p.valorVenda,
+                                          categoria = c.nome
+                                      }).ToList();
 
             return View(lista);
         }
@@ -47,46 +40,36 @@ namespace MyMarket.Controllers
                 return NotFound();
             }
 
-            var dbProduto = (from p in _bancocontext.produtos
-                             join c in _bancocontext.categorias on p.categoriaid equals c.id
-                             select new DtoProduto
-                             {
-                                 id = p.id,
-                                 nomeProduto = p.nomeProduto,
-                                 imagem = p.imagem,
-                                 valorVenda = p.valorVenda,
-                                 nomecategoria = c.nome,
-                                 estoque = p.estoqueAtual
-                             }).FirstOrDefault();
-            if (dbProduto == null)
+            var Produto = await _bancocontext.produtos
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (Produto == null)
             {
                 return NotFound();
             }
 
-            return View(dbProduto);
+            return View(Produto);
         }
 
         public IActionResult Create()
         {
-            ViewBag.Categoria1 = new SelectList(_bancocontext.categorias, "id", "nome");
+            ViewBag.Categoria2 = new SelectList(_bancocontext.categorias, "id", "nome");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nomeProduto,imagem,arquivo,estoqueAtual, valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
+        public async Task<IActionResult> Create([Bind("id,nomeProduto,imagem,arquivo,valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
         {
             if (ModelState.IsValid)
             {
                 IFormFile imagemEnviada = arquivo;
-                if (imagemEnviada == null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+                if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
                 {
                     MemoryStream ms = new MemoryStream();
                     imagemEnviada.OpenReadStream().CopyTo(ms);
                     Produto.arquivo = ms.ToArray();
                     Produto.imagem = imagemEnviada.FileName;
-                    
-                }              
+                }
 
                 _bancocontext.Add(Produto);
                 await _bancocontext.SaveChangesAsync();
@@ -102,38 +85,26 @@ namespace MyMarket.Controllers
             {
                 return NotFound();
             }
-            var dbProduto = (from p in _bancocontext.produtos
-                             join c in _bancocontext.categorias on p.categoriaid equals c.id
-                             select new DtoProduto
-                             {
-                                 id = p.id,
-                                 nomeProduto = p.nomeProduto,
-                                 imagem = p.imagem,
-                                 valorVenda = p.valorVenda,
-                                 nomecategoria = c.nome,
-                                 estoque = p.estoqueAtual,
-                                 categoriaid = p.categoriaid
-                             }).FirstOrDefault();
 
-           
-            if (dbProduto == null)
+            var Produto = await _bancocontext.produtos.FindAsync(id);
+            if (Produto == null)
             {
                 return NotFound();
             }
-            return View(dbProduto);
+            return View(Produto);
+
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,estoque,nomecategoria, arquivo, categoriaid, dataAlteracao")] Produto Produto)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,idestoque,idcategoria,dataCadastro,dataAlteracao")] Produto Produto)
         {
             if (id != Produto.id)
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
-               
                 try
                 {
                     _bancocontext.Update(Produto);
@@ -163,23 +134,14 @@ namespace MyMarket.Controllers
                 return NotFound();
             }
 
-            var dbProduto = (from p in _bancocontext.produtos
-                             join c in _bancocontext.categorias on p.categoriaid equals c.id
-                             select new DtoProduto
-                             {
-                                 id = p.id,
-                                 nomeProduto = p.nomeProduto,
-                                 imagem = p.imagem,
-                                 valorVenda = p.valorVenda,
-                                 nomecategoria = c.nome,
-                                 estoque = p.estoqueAtual
-                             }).FirstOrDefault();
-            if (dbProduto == null)
+            var Produto = await _bancocontext.produtos
+                .FirstOrDefaultAsync(m => m.id == id);
+            if (Produto == null)
             {
                 return NotFound();
             }
 
-            return View(dbProduto);
+            return View(Produto);
         }
 
         // POST: Chamada/Delete/5
@@ -205,6 +167,5 @@ namespace MyMarket.Controllers
         {
             return (_bancocontext.produtos?.Any(e => e.id == id)).GetValueOrDefault();
         }
-
     }
 }

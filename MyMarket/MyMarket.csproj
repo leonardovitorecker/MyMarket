@@ -8,14 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
     <Compile Remove="wwwroot\arquivos\**" />
-    <Content Remove="Migrations\**" />
     <Content Remove="wwwroot\arquivos\**" />
-    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="wwwroot\arquivos\**" />
-    <None Remove="Migrations\**" />
     <None Remove="wwwroot\arquivos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Pedido\Create.cshtml" />
+    <None Include="Views\Pedido\Delete.cshtml" />
+    <None Include="Views\Pedido\Details.cshtml" />
+    <None Include="Views\Pedido\Edit.cshtml" />
+    <None Include="Views\Pedido\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
