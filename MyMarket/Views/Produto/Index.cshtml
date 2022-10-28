@@ -4,12 +4,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-striped table-dark">
+
+<div class="container">
+    <div class="row">
+        <p></p>
+    </div>
+
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Produtos</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a type="button" class="btn btn-dark" asp-area="" asp-controller="produto" asp-action="Create">Novo Produto</a>
+        </li>
+        <li class="nav-item">
+          <a type="button" class="btn btn-dark" asp-area="" asp-controller="" asp-action="">Relatório 1</a>
+        </li>
+        <li class="nav-item">
+          <a type="button" class="btn btn-dark" asp-area="" asp-controller="pedido" asp-action="Index">Pedidos</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="row">
+        <p></p>
+    </div>
+
+    <table class="table table-striped table-dark">
     <thead>
         <tr>
             <th>
@@ -54,3 +82,5 @@
 }
     </tbody>
 </table>
+</div>
+

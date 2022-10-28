@@ -4,54 +4,112 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Produto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="nomeProduto" class="control-label">Nome do produto</label>
-                <input asp-for="nomeProduto" class="form-control" />
-                <span asp-validation-for="nomeProduto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="valorVenda" class="control-label">Valor de venda</label>
-                <input asp-for="valorVenda" class="form-control" />
-                <span asp-validation-for="valorVenda" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="categoriaid" class="control-label">Categoria</label>
-                @*HtmlHelpers*@
-                @*<text>Local</text> @Html.DropDownList("Categoria", new SelectList(ViewBag.Categoria))*@
-                @*Razor*@
-                <select asp-items=@ViewBag.Categoria2 asp-for="categoriaid" class="form-control"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="valorVenda" class="control-label">Valor de venda</label>
-                <input asp-for="valorVenda" class="form-control" />
-                <span asp-validation-for="valorVenda" class="text-danger"></span>
-            </div>
-             <div class="form-group">
-                <label asp-for="arquivo" class="control-label">Imagem</label>
-                <input asp-for="arquivo" type="file" class="form-control"/>
-                <span asp-validation-for="arquivo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <p></p>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Produtos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-dark" asp-area="" asp-controller="produto" asp-action="Create">Novo Produto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-dark" asp-area="" asp-controller="" asp-action="">Relatório 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-dark" asp-area="" asp-controller="pedido" asp-action="Index">Pedidos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-@section Scripts {
+    <div class="row">
+        <p></p>
+    </div>
+
+    <div class="form-group">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="nomeProduto" class="control-label">Nome do produto</label>
+                        <input asp-for="nomeProduto" class="form-control" />
+                        <span asp-validation-for="nomeProduto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="valorVenda" class="control-label">Valor de venda</label>
+                        <input asp-for="valorVenda" class="form-control" />
+                        <span asp-validation-for="valorVenda" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="categoriaid" class="control-label">Categoria</label>
+                        @*HtmlHelpers*@
+                        @*<text>Local</text> @Html.DropDownList("Categoria", new SelectList(ViewBag.Categoria))*@
+                        @*Razor*@
+                        <select asp-items=@ViewBag.Categoria2 asp-for="categoriaid" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="valorVenda" class="control-label">Valor de venda</label>
+                        <input asp-for="valorVenda" class="form-control" />
+                        <span asp-validation-for="valorVenda" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                        <label asp-for="arquivo" class="control-label">Imagem</label>
+                        <input asp-for="arquivo" type="file" class="form-control" />
+                        <span asp-validation-for="arquivo" class="text-danger"></span>
+                    </div>
+            </div>
+        </div>
+        </form>
+
+        <div class="row">
+            <p></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+
+
+
+
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+    }
+    }
