@@ -16,7 +16,7 @@ namespace MyMarket.Models
         public string confirmarSenha { get; set; }
         public string? cpf { get; set; }
         public string telefone { get; set; }
-        public ICollection<Pedido>? pedidos { get; set; }
+      
         public ICollection<Endereco>? enderecos { get; set; }
         public DateTime dataCadastro { get; set; } = DateTime.Now;
         public DateTime dataAlteracao { get; set; } = DateTime.Now;

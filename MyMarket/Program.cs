@@ -8,13 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(
-        "Host=localhost;Port=5432;Database=mark3;User Id=postgres; Password=root;"));
+        "Host=localhost;Port=5432;Database=market2;User Id=postgres; Password=root;"));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ISessao, Sessao>();
-
-       
+builder.Services.AddSession();
 
 var app = builder.Build();
+
 
 
 
@@ -37,5 +37,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.UseSession();
 app.Run();
