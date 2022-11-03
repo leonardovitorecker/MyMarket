@@ -19,7 +19,7 @@ namespace MyMarket.Controllers
 
         public ActionResult Index()
         {
-            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext);
+            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext, _bancocontext);
             var viewModel = new CarrinhoComprasViewModel
             {
                 CartItems = carrinho.GetCarrinhoItens(),
@@ -33,7 +33,7 @@ namespace MyMarket.Controllers
             var addedProduto = _bancocontext.produtos.Single(
                 produto => produto.id == id);
 
-            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext);
+            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext, _bancocontext);
 
             carrinho.AddCarrinho(addedProduto);
 
@@ -43,9 +43,9 @@ namespace MyMarket.Controllers
         [HttpPost]
         public ActionResult RemoveCarrinho(int id)
         {
-            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext);
+            var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext, _bancocontext);
 
-            string produtoNome = _bancocontext.Carrinhos.Single(
+            string produtoNome = _bancocontext.carrinhos.Single(
                 item => item.recordId == id).produto.nomeProduto;
 
             int ItemCount = carrinho.RemoverFromCarrinho(id);

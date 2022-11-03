@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyMarket.Database;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,34 @@ namespace MyMarket.Models
     {
 
         private readonly Context _bancocontext;
+        
 
         public CarrinhoCompras(Context context)
         {
 
             _bancocontext = context;
-
         }
 
-        public CarrinhoCompras()
-        {
-        }
+       
 
         string? CarrinhoCompraId { get; set; }
         public const string CarrinhoSessionKey = "CarrinhoId";
-        public static CarrinhoCompras GetCarrinho(HttpContext context)
+        public static CarrinhoCompras GetCarrinho(HttpContext context, Context context1)
         {
-            var carrinho = new CarrinhoCompras();
+           
+            var carrinho = new CarrinhoCompras(context1);
             carrinho.CarrinhoCompraId = carrinho.GetCarrinhoId(context);
             return carrinho;
         }
 
-        public static CarrinhoCompras GetCarrinho(Controller controller)
+        public static CarrinhoCompras GetCarrinho(Controller controller, Context context)
         { 
-            return GetCarrinho(controller.HttpContext);
+            return GetCarrinho(controller.HttpContext, context);
 
         }
         public void AddCarrinho(Produto produto)
         {
-            var carrinhoItem = _bancocontext.Carrinhos.SingleOrDefault(
+            var carrinhoItem = _bancocontext?.carrinhos?.SingleOrDefault(
                 c => c.CarrinhoId == CarrinhoCompraId
                 && c.produtoId == produto.id);
 
@@ -52,19 +52,19 @@ namespace MyMarket.Models
                     count = 1,
                     dateCreated = DateTime.Now,
                 };
-                _bancocontext.Carrinhos.Add(carrinhoItem);
+                _bancocontext?.carrinhos?.Add(carrinhoItem);
             }
             else
             {
                 carrinhoItem.count++;
             }
 
-            _bancocontext.SaveChanges();
+            _bancocontext?.SaveChanges();
         }
 
         public int RemoverFromCarrinho(int id)
         {
-            var carrinhoItem = _bancocontext.Carrinhos.Single(
+            var carrinhoItem = _bancocontext.carrinhos.Single(
                 carrinho => carrinho.CarrinhoId == CarrinhoCompraId 
                 && carrinho.recordId == id);
 
@@ -79,7 +79,7 @@ namespace MyMarket.Models
                 }
                 else
                 {
-                    _bancocontext.Carrinhos.Remove(carrinhoItem);
+                    _bancocontext.carrinhos.Remove(carrinhoItem);
                 }
 
                 _bancocontext.SaveChanges();
@@ -89,25 +89,25 @@ namespace MyMarket.Models
 
         public void EmptyCarrinho()
         {
-            var carrinhoItems = _bancocontext.Carrinhos.Where(
+            var carrinhoItems = _bancocontext.carrinhos.Where(
                 carrinho => carrinho.CarrinhoId == CarrinhoCompraId);
 
             foreach ( var carrinhoItem in carrinhoItems)
             {
-                _bancocontext.Carrinhos.Remove(carrinhoItem);
+                _bancocontext.carrinhos.Remove(carrinhoItem);
             }
             _bancocontext.SaveChanges();
         }
 
         public List<Carrinho> GetCarrinhoItens()
         {
-            return _bancocontext.Carrinhos.Where(
+            return _bancocontext.carrinhos.Where(
                 carrinho => carrinho.CarrinhoId == CarrinhoCompraId).ToList();
         }
 
         public int GetCount()
         {
-            int? count = (from carrinhoItens in _bancocontext.Carrinhos
+            int? count = (from carrinhoItens in _bancocontext.carrinhos
                           where carrinhoItens.CarrinhoId == CarrinhoCompraId
                           select (int?)carrinhoItens.count).Sum();
 
@@ -116,7 +116,7 @@ namespace MyMarket.Models
 
         public decimal GetTotal()
         {
-            decimal total = (from carrinhoItens in _bancocontext.Carrinhos
+            decimal total = (from carrinhoItens in _bancocontext.carrinhos
                              where carrinhoItens.CarrinhoId == CarrinhoCompraId
                              select carrinhoItens.count *
                              carrinhoItens.produto.valorVenda).Sum();
@@ -175,9 +175,9 @@ namespace MyMarket.Models
         }
         public void MigrateCarrinho(string userName)
         {
-            var CarrinhoCompras = _bancocontext.Carrinhos.Where(
+            var CarrinhoCompras = _bancocontext.carrinhos.Where(
                 c => c.CarrinhoId == CarrinhoCompraId);
-            
+
             foreach (Carrinho item in CarrinhoCompras)
             {
                 item.CarrinhoId = userName;
