@@ -70,13 +70,20 @@ namespace MyMarket.Controllers
                     Produto.arquivo = ms.ToArray();
                     Produto.imagem = imagemEnviada.FileName;
                 }
-
                 _bancocontext.Add(Produto);
                 await _bancocontext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(Produto);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// 
+
+
 
         public async Task<IActionResult> Edit(int? id)
         {
