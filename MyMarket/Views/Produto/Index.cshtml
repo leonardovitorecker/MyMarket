@@ -4,8 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
- 
-
 <h1>Index</h1>
 
 <p>
@@ -24,11 +22,10 @@
                 Valor de venda
             </th>
             <th>
-                categoria
+                estoque
             </th>
             <th>
-                estoque
-                
+                categoria
             </th>
             <th></th>
         </tr>
@@ -40,16 +37,13 @@
                 @Html.DisplayFor(modelItem => item.nomeProduto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.arquivo)
+                @Html.DisplayFor(modelItem => item.imagem)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.valorVenda)
             </td>
              <td>
-                @Html.DisplayFor(modelItem => item.nomecategoria)
-            </td>
-             <td>
-                @Html.DisplayFor(modelItem => item.estoque)
+                @Html.DisplayFor(modelItem => item.categoria)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning">Editar</a>
@@ -60,4 +54,3 @@
 }
     </tbody>
 </table>
-

@@ -135,7 +135,7 @@ namespace MyMarket.Models
                 var pedidoDetalhe = new PedidoDetalhe
                 {
                     produtoId = item.produtoId,
-                    PedidoId = pedido.pedidoId,
+                    PedidoId = pedido.id,
                     UnitPreco = item.produto.valorVenda,
                     quantidade = item.count
                 };
@@ -149,7 +149,7 @@ namespace MyMarket.Models
             _bancocontext.SaveChanges();
             EmptyCarrinho();
 
-            return pedido.pedidoId;
+            return pedido.id;
         }
 
         public string GetCarrinhoId(HttpContext context)

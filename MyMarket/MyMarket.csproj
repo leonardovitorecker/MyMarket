@@ -15,43 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
-    <Compile Include="obj\Debug\net6.0\MyMarket.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net6.0\MyMarket.GlobalUsings.g.cs" />
-    <Compile Include="obj\Debug\net6.0\MyMarket.MvcApplicationPartsAssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net6.0\MyMarket.RazorAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="obj\Debug\net6.0\MyMarket.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\net6.0\project.razor.json" />
-    <Content Include="obj\Debug\net6.0\scopedcss\bundle\MyMarket.styles.css" />
-    <Content Include="obj\Debug\net6.0\scopedcss\projectbundle\MyMarket.bundle.scp.css" />
-    <Content Include="obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css" />
-    <Content Include="obj\Debug\net6.0\staticwebassets.build.json" />
-    <Content Include="obj\Debug\net6.0\staticwebassets.development.json" />
-    <Content Include="obj\MyMarket.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="obj\Debug\net6.0\apphost.exe" />
-    <None Include="obj\Debug\net6.0\MyMarket.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.assets.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.csproj.CopyComplete" />
-    <None Include="obj\Debug\net6.0\MyMarket.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.dll" />
-    <None Include="obj\Debug\net6.0\MyMarket.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Debug\net6.0\MyMarket.genruntimeconfig.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.MvcApplicationPartsAssemblyInfo.cache" />
-    <None Include="obj\Debug\net6.0\MyMarket.pdb" />
-    <None Include="obj\Debug\net6.0\MyMarket.RazorAssemblyInfo.cache" />
-    <None Include="obj\Debug\net6.0\ref\MyMarket.dll" />
-    <None Include="obj\MyMarket.csproj.nuget.g.props" />
-    <None Include="obj\MyMarket.csproj.nuget.g.targets" />
-    <None Include="obj\project.nuget.cache" />
-    <None Include="obj\staticwebassets.pack.sentinel" />
+    <None Include="Views\Pedido\Create.cshtml" />
+    <None Include="Views\Pedido\Delete.cshtml" />
+    <None Include="Views\Pedido\Details.cshtml" />
+    <None Include="Views\Pedido\Edit.cshtml" />
+    <None Include="Views\Pedido\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -72,11 +40,6 @@
 
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="obj\Debug\net6.0\staticwebassets\" />
   </ItemGroup>
 
 </Project>
