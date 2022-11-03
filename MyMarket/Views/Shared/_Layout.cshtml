@@ -14,16 +14,16 @@
         <div class="menu-bar">
             <nav class="navbar navbar-expand-sm" style="background-color: black;">
 
-                <router-link id="logo" class="btn btn-light btn-outline-primary" to="/"><img class="logo" src="Image/mymarket.png" alt="logo"></router-link>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" asp-controller="Produto" asp-action="Index" method="get">
-                 <ul class="navbar-nav ms-auto" id="navsearsh">
-                  <p>
-                 @using (Html.BeginForm()){    
+                <router-link id="logo" class="btn btn-light btn-outline-primary" to="index"><img class="logo" src="Image/mymarket.png" alt="logo"></router-link>
+                <ul class="navbar-nav ms-auto"  width="30" height="30">
+                    <p>
+                 @using  (Html.BeginForm()){    
                               @Html.TextBox("searchstring"); }
                  </p>
-                 </ul>
-
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item" asp-controller="Produto" asp-action="Index" method="get">
+                 
                 <li class="nav=item m-1">
                     <router-link class="btn  btn-outline-light" id = "btn-login"asp-controller="Login" asp-action="Create"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
@@ -38,10 +38,6 @@
                  <li class="nav-item">
                     <a class="nav-link text-white" asp-area="" asp-controller="produto" asp-action="Index">Produto</a>
                  </li>
-                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="estoque" asp-action="Index">Estoque</a>
-                 </li>
-
             </ul>
         </nav>
         </div>

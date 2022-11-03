@@ -85,3 +85,107 @@ body {
     display: inline;
     float: left;
 }
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+#logo {
+    background-color: black;
+    --bs-btn-border-color: black;
+    --bs-btn-hover-border-color: black;
+    --bs-btn-focus-shadow-rgb: black;
+    --bs-btn-active-border-color: black;
+}
+
+#container-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 80px;
+    border-radius: 15px;
+}
+
+#ovBTN_login {
+    position: absolute;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 7px 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: end;
+}
+
+#ovBTN_cadastrar {
+    position: absolute;
+    width: 591px;
+    height: 60px;
+    left: 420px;
+    top: 843px;
+    background: #DB841E;
+    border-radius: 14px;
+}
+
+#btn-esqueceu {
+    --bs-btn-hover-bg: #white;
+    --bs-btn-hover-border-color: #white;
+    --bs-btn-active-bg: #white;
+}
+
+#btn-novo {
+    --bs-btn-hover-bg: #white;
+    --bs-btn-hover-border-color: #white;
+    --bs-btn-active-bg: #white;
+}
+
+#btn-add {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: right;
+}
+
+#btn-addcarrinho {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: right;
+}
+
+.txtlogin {
+    top: 100%;
+    right: 100%;
+    padding: 60px;
+    border-radius: 15px;
+}
+
+
+#text-btn {
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: right;
+}
+
+#searchstring {
+    display: inline;
+    float: left;
+}
