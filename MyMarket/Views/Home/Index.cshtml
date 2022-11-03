@@ -3,17 +3,15 @@
     ViewData["Title"] = "Home Page";
 }
  
-    <tbody>
-       
-            <div class= "row">          
+    <div class= "row">         
+        @foreach (var item in Model)
+        {
+                  
             <div class="col-3">
-                 @foreach (var item in Model)
-                {
-                <div class="card"> 
-                     <a href="@Url.Action("Privacy")">
+                <div class="card">
+                     <a asp-action="ProdutoExpandido" asp-route-id="@item.id" >
                      <svg> class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns= @Html.DisplayFor(modelItem => item.imagem)
                          <rect width=260px height="100%" fill="#55595c"></rect></svg>
-
                          </a>
 
                         <div class="card-body">
@@ -21,26 +19,22 @@
                                 <div class="card-body">
                                        <div>
                                         @Html.DisplayFor(modelItem => item.nomeProduto)</div>                                      
-                                              <div>
+                                              <div>R$
                                              @Html.DisplayFor(modelItem => item.valorVenda)</div>
                                        </div>   
 
                                 </div>
                                 <div>
                
-                                  <a asp-action="ProdutoExpandido" asp-route-id="@item.id" class="btn btn-danger">Ver mais</a>
+                                  <a asp-action="ProdutoExpandido" asp-route-id="@item.id" id="text-btn" class="btn btn-warning">ADICIONAR AO CARRINHO</a>
                                   <p class="button"> @Html.ActionLink("Add tocart", "AddCarrinho", "CarrinhoCompras", new { id = item.id }, "")
                                 </p>
                                 </div>
                             </div>
-                        </div>                
-            }
-            </div> 
-                </div>
-    </tbody>
-</table>
-</div>
-</div> 
+                        </div>
 
- 
-
+                </div> 
+              
+               
+        }
+          </div>
