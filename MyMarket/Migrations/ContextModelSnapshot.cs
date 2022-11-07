@@ -47,7 +47,7 @@ namespace MyMarket.Migrations
 
                     b.HasIndex("produtoId");
 
-                    b.ToTable("Carrinhos");
+                    b.ToTable("carrinhos");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
@@ -132,8 +132,6 @@ namespace MyMarket.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("usuarioid");
-
                     b.ToTable("pedidos");
                 });
 
@@ -185,6 +183,9 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("estoque")
+                        .HasColumnType("integer");
 
                     b.Property<string>("imagem")
                         .HasColumnType("text");
@@ -265,15 +266,6 @@ namespace MyMarket.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
-                {
-                    b.HasOne("MyMarket.Models.Usuario", null)
-                        .WithMany("pedidos")
-                        .HasForeignKey("usuarioid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MyMarket.Models.PedidoDetalhe", b =>
                 {
                     b.HasOne("MyMarket.Models.Pedido", "pedido")
@@ -310,8 +302,6 @@ namespace MyMarket.Migrations
             modelBuilder.Entity("MyMarket.Models.Usuario", b =>
                 {
                     b.Navigation("enderecos");
-
-                    b.Navigation("pedidos");
                 });
 #pragma warning restore 612, 618
         }

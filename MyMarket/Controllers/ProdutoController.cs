@@ -58,33 +58,27 @@ namespace MyMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nomeProduto,imagem,arquivo,valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
-        {
+        public async Task<IActionResult> Create([Bind("id,nomeProduto,estoque,imagem,valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
+         {
             if (ModelState.IsValid)
             {
-                IFormFile imagemEnviada = arquivo;
-                if (imagemEnviada != null || imagemEnviada.ContentType.ToLower().StartsWith("image/"))
+                var httpRequest = Request.Form;
+                var postedFile = httpRequest.Files[0];
+                string filename = postedFile.FileName;
+                var physicalPath = webHostEnvironment.ContentRootPath + "/Arquivo/" + filename;
+                using (var stream = new FileStream(physicalPath, FileMode.Create))
                 {
-                    MemoryStream ms = new MemoryStream();
-                    imagemEnviada.OpenReadStream().CopyTo(ms);
-                    Produto.arquivo = ms.ToArray();
-                    Produto.imagem = imagemEnviada.FileName;
+                    postedFile.CopyTo(stream);
                 }
+                Produto.imagem = arquivo.FileName;
+                
                 _bancocontext.Add(Produto);
                 await _bancocontext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(Produto);
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// 
-
-
-
+        
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.Categoria2 = new SelectList(_bancocontext.categorias, "id", "nome");
@@ -104,7 +98,7 @@ namespace MyMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,valorVenda,idestoque,idcategoria,dataCadastro,dataAlteracao")] Produto Produto)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,estoque,valorVenda,categoriaid")] Produto Produto)
         {
             if (id != Produto.id)
             {
