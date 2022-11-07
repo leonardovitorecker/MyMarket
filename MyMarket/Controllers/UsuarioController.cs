@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyMarket.Database;
+using MyMarket.Helper;
 using MyMarket.Models;
 
 namespace MyMarket.Controllers
@@ -9,14 +10,18 @@ namespace MyMarket.Controllers
     {
 
         private readonly Context _bancocontext;
+        private readonly ISessao _sessao;
 
-        public UsuarioController(Context context)
+        public UsuarioController(Context context, ISessao sessao)
         {
+            _sessao = sessao;
             _bancocontext = context;
         }
         // GET: UsuarioController
         public ActionResult Index()
         {
+            if (_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
+
             return View();
         }
 
@@ -25,7 +30,7 @@ namespace MyMarket.Controllers
         {
             return View();
         }
-
+   
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -46,8 +51,10 @@ namespace MyMarket.Controllers
                             if (usuario.senha == usuario.confirmarSenha)
                             {
                                 usuario.SetSenhaHash();
+
                                 _bancocontext.usuarios.Add(usuario);
                                 _bancocontext.SaveChanges();
+                                _sessao.CriarSessaoDoUsuario(usuario);
                                 return RedirectToAction("Index", "Home");
                             }
                             else TempData["MensagemErro"] = $"Senhas não coicidem";
@@ -59,7 +66,7 @@ namespace MyMarket.Controllers
                          TempData["MensagemErro"] = $"Username ja existe";
                     return RedirectToAction("Create", "Usuario");
                 }
-             else   return RedirectToAction("Index","Home");
+             else   return RedirectToAction("Create");
             }
             catch (Exception erro)
             {

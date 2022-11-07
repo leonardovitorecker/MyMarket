@@ -14,7 +14,11 @@ builder.Services.AddDbContext<Context>(
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ISessao, Sessao>();
 builder.Services.AddSession();
-
+builder.Services.AddSession(o =>
+{
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 
@@ -38,6 +42,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Create}/{id?}");
 app.UseSession();
 app.Run();

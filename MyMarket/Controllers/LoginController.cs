@@ -20,13 +20,15 @@ namespace MyMarket.Controllers
         // GET: LoginController
         public ActionResult Index()
         {
+            if (_sessao.BuscarSessaoDoUsuario() != null) return RedirectToAction("Index", "Home");
+
             return View();
         }
         public IActionResult Sair()
         {
             _sessao.RemoverSessaoUsuario();
 
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Create", "Login");
 
         }
 
@@ -66,7 +68,7 @@ namespace MyMarket.Controllers
                         loginUsuario.SetSenhaHash();
                         if (usuario.SenhaValida(loginUsuario.senha))
                         {
-                           
+                            _sessao.CriarSessaoDoUsuario(usuario);
                             return RedirectToAction("Index", "Home");
                         }
                         else TempData["MensagemErro"] = $"Senha do usuário inválida. Por favor, tente novamente.";
