@@ -1,0 +1,38 @@
+﻿@model Usuario
+<div class="btn btn-light btn-outline-primary">
+    <img class="logo" src="../" />
+</div>
+ <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+      <ul class="navbar-nav flex-grow-1 fs-5">   
+<p>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("searchstring")
+    }
+</p>
+ </ul>
+  </div>
+  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+      <ul class="navbar-nav flex-grow-1 fs-5">   
+<li class="nav=item m-1">
+    <a class="btn  btn-outline-light" asp-controller="CarrinhoCompras" asp-action="Index">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+            <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+        </svg>
+    </a>
+</li>
+  </ul>
+  </div>
+<div class="navbar-collapse collapse d-sm-inline-flex">
+    <ul class="navbar-nav flex-grow-1 fs-5 justify-content-md-end">
+        <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Minha Conta
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark  fs-5" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+

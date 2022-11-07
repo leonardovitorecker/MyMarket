@@ -1,5 +1,7 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,66 +15,23 @@
     <div id="app">
         <div class="menu-bar">
             <nav class="navbar navbar-expand-sm" style="background-color: black;">
+                @await Component.InvokeAsync("Menu")
 
-                <router-link id="logo" class="btn btn-light btn-outline-primary" to="index"><img class="logo" src="Image/mymarket.png" alt="logo"></router-link>
-                <ul class="navbar-nav ms-auto"  width="30" height="30">
-                    <p>
-                 @using  (Html.BeginForm()){    
-                              @Html.TextBox("searchstring"); }
-                 </p>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item" asp-controller="Produto" asp-action="Index" method="get">
-                 
-                <li class="nav=item m-1">
-                    <router-link class="btn  btn-outline-light" id = "btn-login"asp-controller="Login" asp-action="Create"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                      </svg></router-link>
-                </li>
-
-                <li class="nav=item m-1">
-                    <router-link class="btn  btn-outline-light" to="/categoria"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
-                        <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                      </svg></router-link>
-                </li>
-                 <li class="nav-item">
-                    <a class="nav-link text-white" asp-area="" asp-controller="produto" asp-action="Index">Produto</a>
-                 </li>
-            </ul>
-        </nav>
+            </nav>
         </div>
-</div>    
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - MyMarket - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-<div id="modal" class="modal fade" role="dialog" />
 </html>
 @section scripts{
-    <script>
-       function CreateUser(e) {
-    e.preventDefault();
-    var url = appSettings + "/Error";
-    $.ajax({
-        type: "GET",
-        url: url,
-        success: function (data) {
-            $("#modalplace").html(data);
-            $("#modalCarrinho").modal('show');
-        }
-    })
-    </script>
+
 }
 

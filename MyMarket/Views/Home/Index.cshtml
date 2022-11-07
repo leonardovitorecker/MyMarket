@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@{
+    Layout = "_Layout";
+}
  
     <div class= "row">         
         @foreach (var item in Model)
@@ -27,8 +30,7 @@
                                 <div>
                
                                   <a asp-action="ProdutoExpandido" asp-route-id="@item.id" id="text-btn" class="btn btn-warning">ADICIONAR AO CARRINHO</a>
-                                  <p class="button"> @Html.ActionLink("Add tocart", "AddCarrinho", "CarrinhoCompras", new { id = item.id }, "")
-                                </p>
+                                
                                 </div>
                             </div>
                         </div>

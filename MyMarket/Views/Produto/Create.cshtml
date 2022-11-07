@@ -3,7 +3,16 @@
 @{
     ViewData["Title"] = "Create";
 }
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyMarket</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyMarket.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</head>
+<body>
 <h1>Create</h1>
 
 <h4>Produto</h4>
@@ -49,9 +58,9 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+<div id="modal" class="modal fade" role="dialog" />
 
-@section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
