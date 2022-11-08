@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221104010040_MYMARKET")]
-    partial class MYMARKET
+    [Migration("20221107225951_databae")]
+    partial class databae
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
