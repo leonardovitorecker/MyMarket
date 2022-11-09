@@ -29,11 +29,11 @@
                 <select asp-items=@ViewBag.Usuario2 asp-for="usuarioid" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="produtoid" class="control-label"></label>
+                <label asp-for="recordId" class="control-label"></label>
                 @*HtmlHelpers*@
                 @*<text>Produto</text> @Html.DropDownList("Produto", new SelectList(ViewBag.Produto))*@
                 @*Razor*@
-                <select asp-items=@ViewBag.Produto2 asp-for="produtoid" class="form-control"></select>
+                <select asp-items=@ViewBag.Produto2 asp-for="recordId" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="valorTotal" class="control-label"></label>

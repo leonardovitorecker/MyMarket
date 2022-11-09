@@ -10,7 +10,8 @@ namespace MyMarket.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         public int usuarioid { get; set; }
-        public int produtoid { get; set; }
+       public List<Carrinho> carrinho { get; set; }
+        public int recordId { get; set; }
         public decimal valorTotal { get; set; }
         public DateTime dataCadastro { get; set; } = DateTime.Now;
     }

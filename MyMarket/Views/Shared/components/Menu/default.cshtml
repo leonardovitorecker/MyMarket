@@ -2,18 +2,17 @@
 <div class="btn btn-light btn-outline-primary">
     <img class="logo" src="../" />
 </div>
- <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-      <ul class="navbar-nav flex-grow-1 fs-5">   
+<ul class="navbar-nav ms-auto" >
+
 <p>
     @using (Html.BeginForm())
     {
         @Html.TextBox("searchstring")
     }
+
 </p>
- </ul>
-  </div>
-  <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-      <ul class="navbar-nav flex-grow-1 fs-5">   
+</ul>
+ <ul class="navbar-nav ms-auto">
 <li class="nav=item m-1">
     <a class="btn  btn-outline-light" asp-controller="CarrinhoCompras" asp-action="Index">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
@@ -21,18 +20,16 @@
         </svg>
     </a>
 </li>
-  </ul>
-  </div>
-<div class="navbar-collapse collapse d-sm-inline-flex">
-    <ul class="navbar-nav flex-grow-1 fs-5 justify-content-md-end">
+
+
         <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Minha Conta
             </a>
             <ul class="dropdown-menu dropdown-menu-dark  fs-5" aria-labelledby="navbarDropdown">
+                 <li><a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Edit">Meus dados</a></li>
+                 <li><a class="dropdown-item" asp-area="" asp-controller="Endereco" asp-action="Create"> Meus endereços</a></li>
                 <li><a class="dropdown-item" asp-area="" asp-controller="Login" asp-action="Sair">Sair</a></li>
             </ul>
         </li>
     </ul>
-</div>
-

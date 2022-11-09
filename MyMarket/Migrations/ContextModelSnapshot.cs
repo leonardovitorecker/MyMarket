@@ -34,6 +34,9 @@ namespace MyMarket.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("Pedidoid")
+                        .HasColumnType("integer");
+
                     b.Property<int>("count")
                         .HasColumnType("integer");
 
@@ -45,9 +48,11 @@ namespace MyMarket.Migrations
 
                     b.HasKey("recordId");
 
+                    b.HasIndex("Pedidoid");
+
                     b.HasIndex("produtoId");
 
-                    b.ToTable("Carrinhos");
+                    b.ToTable("carrinhos");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
@@ -121,7 +126,7 @@ namespace MyMarket.Migrations
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("produtoid")
+                    b.Property<int>("recordId")
                         .HasColumnType("integer");
 
                     b.Property<int>("usuarioid")
@@ -131,8 +136,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("numeric");
 
                     b.HasKey("id");
-
-                    b.HasIndex("usuarioid");
 
                     b.ToTable("pedidos");
                 });
@@ -185,6 +188,12 @@ namespace MyMarket.Migrations
 
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("estoque")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("estoqueAnterior")
+                        .HasColumnType("integer");
 
                     b.Property<string>("imagem")
                         .HasColumnType("text");
@@ -247,6 +256,10 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Carrinho", b =>
                 {
+                    b.HasOne("MyMarket.Models.Pedido", null)
+                        .WithMany("carrinho")
+                        .HasForeignKey("Pedidoid");
+
                     b.HasOne("MyMarket.Models.Produto", "produto")
                         .WithMany()
                         .HasForeignKey("produtoId")
@@ -260,15 +273,6 @@ namespace MyMarket.Migrations
                 {
                     b.HasOne("MyMarket.Models.Usuario", null)
                         .WithMany("enderecos")
-                        .HasForeignKey("usuarioid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
-                {
-                    b.HasOne("MyMarket.Models.Usuario", null)
-                        .WithMany("pedidos")
                         .HasForeignKey("usuarioid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -307,11 +311,14 @@ namespace MyMarket.Migrations
                     b.Navigation("produtos");
                 });
 
+            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
+                {
+                    b.Navigation("carrinho");
+                });
+
             modelBuilder.Entity("MyMarket.Models.Usuario", b =>
                 {
                     b.Navigation("enderecos");
-
-                    b.Navigation("pedidos");
                 });
 #pragma warning restore 612, 618
         }
