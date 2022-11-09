@@ -295,11 +295,15 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="bin\Debug\net6.0\runtimes\linux-arm64\native\" />
     <Folder Include="bin\Debug\net6.0\runtimes\linux-x64\native\" />
     <Folder Include="bin\Debug\net6.0\runtimes\osx-x64\native\" />
     <Folder Include="bin\Debug\net6.0\runtimes\win-x64\native\" />
     <Folder Include="bin\Debug\net6.0\runtimes\win-x86\native\" />
+
+    <Folder Include="Arquivo\" />
+
   </ItemGroup>
 
 </Project>

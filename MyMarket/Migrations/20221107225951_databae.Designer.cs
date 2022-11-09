@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyMarket.Database;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20221107225951_databae")]
+    partial class databae
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +36,6 @@ namespace MyMarket.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("Pedidoid")
-                        .HasColumnType("integer");
-
                     b.Property<int>("count")
                         .HasColumnType("integer");
 
@@ -47,8 +46,6 @@ namespace MyMarket.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("recordId");
-
-                    b.HasIndex("Pedidoid");
 
                     b.HasIndex("produtoId");
 
@@ -126,7 +123,7 @@ namespace MyMarket.Migrations
                     b.Property<DateTime>("dataCadastro")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("recordId")
+                    b.Property<int>("produtoid")
                         .HasColumnType("integer");
 
                     b.Property<int>("usuarioid")
@@ -192,10 +189,6 @@ namespace MyMarket.Migrations
                     b.Property<int>("estoque")
                         .HasColumnType("integer");
 
-
-                    b.Property<int?>("estoqueAnterior")
-                        .HasColumnType("integer");
-
                     b.Property<string>("imagem")
                         .HasColumnType("text");
 
@@ -257,10 +250,6 @@ namespace MyMarket.Migrations
 
             modelBuilder.Entity("MyMarket.Models.Carrinho", b =>
                 {
-                    b.HasOne("MyMarket.Models.Pedido", null)
-                        .WithMany("carrinho")
-                        .HasForeignKey("Pedidoid");
-
                     b.HasOne("MyMarket.Models.Produto", "produto")
                         .WithMany()
                         .HasForeignKey("produtoId")
@@ -310,11 +299,6 @@ namespace MyMarket.Migrations
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
                 {
                     b.Navigation("produtos");
-                });
-
-            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
-                {
-                    b.Navigation("carrinho");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Usuario", b =>
