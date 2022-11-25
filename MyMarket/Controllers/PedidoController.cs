@@ -19,7 +19,7 @@ namespace MyMarket.Controllers
         public async Task<IActionResult> Index()
         {
             List<DtoPedido> lista = (from p in _bancocontext.pedidos
-                                     join c in _bancocontext.carrinhos on p.recordId equals c.recordId
+                                     join c in _bancocontext.carrinhos on p.id equals c.recordId
                                      join u in _bancocontext.usuarios on p.usuarioid equals u.id
                                      select new DtoPedido
                                      {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyMarket.Database;
+using MyMarket.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,10 @@ namespace MyMarket.Models
     {
 
         private readonly Context _bancocontext;
-        
+
 
         public CarrinhoCompras(Context context)
         {
-
             _bancocontext = context;
         }
 
@@ -24,7 +24,8 @@ namespace MyMarket.Models
 
         string? CarrinhoCompraId { get; set; }
         public const string CarrinhoSessionKey = "CarrinhoId";
-        public static CarrinhoCompras GetCarrinho(HttpContext context, Context context1)
+        public static CarrinhoCompras GetCarrinho(HttpContext context, Context context1
+            )
         {
            
             var carrinho = new CarrinhoCompras(context1);

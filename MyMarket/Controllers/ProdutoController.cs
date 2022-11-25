@@ -27,7 +27,8 @@ namespace MyMarket.Controllers
                                           nomeProduto = p.nomeProduto,
                                           imagem = p.imagem,
                                           valorVenda = p.valorVenda,
-                                          categoria = c.nome
+                                          categoria = c.nome,
+                                          estoque = p.estoque
                                       }).ToList();
 
             return View(lista);

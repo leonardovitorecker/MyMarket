@@ -21,8 +21,7 @@ namespace MyMarket.Database
         public DbSet<Carrinho> carrinhos { get; set; }
         public DbSet<Pedido> pedidos { get; set; }
         public DbSet<PedidoDetalhe> PedidoDetalhes { get; set; }
-    
 
-
-}
+  
+    }
 }

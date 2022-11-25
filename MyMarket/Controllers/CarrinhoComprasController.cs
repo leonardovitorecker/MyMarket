@@ -17,7 +17,7 @@ namespace MyMarket.Controllers
           
         }
 
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext, _bancocontext);
             var viewModel = new CarrinhoComprasViewModel
@@ -27,16 +27,17 @@ namespace MyMarket.Controllers
           };
              return View(viewModel);
         }
-
-        public ActionResult AddCarrinho(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(int id)
         {
             var addedProduto = _bancocontext.produtos.Single(
                 produto => produto.id == id);
 
             var carrinho = CarrinhoCompras.GetCarrinho(this.HttpContext, _bancocontext);
 
-            carrinho.AddCarrinho(addedProduto);
-
+             _bancocontext.Add(carrinho);
+            await _bancocontext.SaveChangesAsync();
             return RedirectToAction("index");
         }
 

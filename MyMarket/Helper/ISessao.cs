@@ -7,6 +7,8 @@ namespace MyMarket.Helper
         void CriarSessaoDoUsuario(Usuario usuario);
         void RemoverSessaoUsuario();
         Usuario BuscarSessaoDoUsuario();
-      
+        void CriarSessaoDoCarrinho(Carrinho carrinho);
+        void RemoverSessaoCarrnho();
+        Carrinho BuscarSessaoDoCarrinho();
     }
 }

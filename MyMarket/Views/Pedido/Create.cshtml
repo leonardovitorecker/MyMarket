@@ -29,22 +29,18 @@
                 <select asp-items=@ViewBag.Usuario2 asp-for="usuarioid" class="form-control"></select>
             </div>
             <div class="form-group">
-                <label asp-for="recordId" class="control-label"></label>
+                <label asp-for="id" class="control-label"></label>
                 @*HtmlHelpers*@
                 @*<text>Produto</text> @Html.DropDownList("Produto", new SelectList(ViewBag.Produto))*@
                 @*Razor*@
-                <select asp-items=@ViewBag.Produto2 asp-for="recordId" class="form-control"></select>
+                <select asp-items=@ViewBag.Produto2 asp-for="id" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label asp-for="valorTotal" class="control-label"></label>
                 <input asp-for="valorTotal" class="form-control" />
                 <span asp-validation-for="valorTotal" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="dataCadastro" class="control-label"></label>
-                <input asp-for="dataCadastro" class="form-control" />
-                <span asp-validation-for="dataCadastro" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -45,10 +45,9 @@
                                 <button id="btn-additem" type="button" class="btn">+</button>
                               </div>
                             </div>
-                            
                             <div class="row">
+                               <a asp-action="Create" asp-route-id="@Model.id">Adicionar</a>
                               <div class="col-md-12 d-flex justify-content-center">
-                                 <p class="button"> @Html.ActionLink("Add tocart", "AddCarrinho", "CarrinhoCompras", new { id = Model.id }, "")
                                 </p>
                               </div>
                             </div>

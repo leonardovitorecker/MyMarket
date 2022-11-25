@@ -23,7 +23,19 @@ namespace MyMarket.Models
 
         public bool SenhaValida(string senhaUsuario)
         {
-            return senha == senhaUsuario;
+            if(senha == senhaUsuario) { return true; }
+            return false;
+        }
+        public bool validSenha(string senha)
+        {
+            if(senha.Length > 6)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         public void SetSenhaHash()
         {

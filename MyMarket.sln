@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMarket", "MyMarket\MyMarket.csproj", "{58E76EE8-044D-4F43-8644-6C50BC7D1D87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMarket", "MyMarket\MyMarket.csproj", "{58E76EE8-044D-4F43-8644-6C50BC7D1D87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestControllerrUsuario", "TestControllerrLoginUsuario\TestControllerrUsuario.csproj", "{13363CB8-2F31-4F84-906D-4396DC751A39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{58E76EE8-044D-4F43-8644-6C50BC7D1D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E76EE8-044D-4F43-8644-6C50BC7D1D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E76EE8-044D-4F43-8644-6C50BC7D1D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13363CB8-2F31-4F84-906D-4396DC751A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13363CB8-2F31-4F84-906D-4396DC751A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13363CB8-2F31-4F84-906D-4396DC751A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13363CB8-2F31-4F84-906D-4396DC751A39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
