@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/28/2022 18:57:57" ReportInfo.Modified="11/28/2022 19:02:35" ReportInfo.CreatorVersion="2022.2.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="usuarioList" ReferenceName="usuarioList" DataType="null" Enabled="true">
+      <Column Name="id" DataType="System.Int32"/>
+      <Column Name="email" DataType="System.String"/>
+      <Column Name="nome" DataType="System.String"/>
+      <Column Name="senha" DataType="System.String"/>
+      <Column Name="confirmarSenha" DataType="System.String"/>
+      <Column Name="cpf" DataType="System.String"/>
+      <Column Name="telefone" DataType="System.String"/>
+      <BusinessObjectDataSource Name="enderecos" DataType="null" Enabled="true">
+        <Column Name="id" DataType="System.Int32"/>
+        <Column Name="cidade" DataType="System.String"/>
+        <Column Name="cep" DataType="System.String"/>
+        <Column Name="bairro" DataType="System.String"/>
+        <Column Name="rua" DataType="System.String"/>
+        <Column Name="numeroCasa" DataType="System.Int32"/>
+        <Column Name="complemento" DataType="System.String"/>
+        <Column Name="usuarioid" DataType="System.Int32"/>
+        <Column Name="dataAlteracao" DataType="System.DateTime"/>
+      </BusinessObjectDataSource>
+      <Column Name="dataCadastro" DataType="System.DateTime"/>
+      <Column Name="dataAlteracao" DataType="System.DateTime"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
+      <TextObject Name="Text2" Left="85.05" Width="94.5" Height="18.9" Text="email" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="226.8" Width="94.5" Height="18.9" Text="nome" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="387.45" Width="94.5" Height="18.9" Text="cpf" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="538.65" Width="94.5" Height="18.9" Text="telefone" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6" DataSource="usuarioList">
+      <TextObject Name="Text1" Left="85.05" Top="9.45" Width="94.5" Height="18.9" Text="[usuarioList.email]" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="226.8" Top="9.45" Width="94.5" Height="18.9" Text="[usuarioList.nome]" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="387.45" Top="9.45" Width="94.5" Height="18.9" Text="[usuarioList.cpf]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="538.65" Top="9.45" Width="94.5" Height="18.9" Text="[usuarioList.telefone]" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

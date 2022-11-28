@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/28/2022 18:59:46" ReportInfo.Modified="11/28/2022 19:02:41" ReportInfo.CreatorVersion="2022.2.0.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="productList" ReferenceName="productList" DataType="null" Enabled="true">
+      <Column Name="id" DataType="System.Int32"/>
+      <Column Name="nomeProduto" DataType="System.String"/>
+      <Column Name="estoque" DataType="System.Int32"/>
+      <Column Name="valorVenda" DataType="System.Decimal"/>
+      <Column Name="estoqueAnterior" DataType="null"/>
+      <Column Name="categoriaid" DataType="System.Int32"/>
+      <Column Name="dataCadastro" DataType="System.DateTime"/>
+      <Column Name="dataAlteracao" DataType="System.DateTime"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"/>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35">
+      <TextObject Name="Text2" Left="75.6" Width="94.5" Height="18.9" Text="nomeProduto" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="198.45" Width="94.5" Height="18.9" Text="estoque" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="330.75" Width="94.5" Height="18.9" Text="valorVenda" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="463.05" Width="94.5" Height="18.9" Text="dataCadastro" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="604.8" Width="94.5" Height="18.9" Text="dataAlteracao" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="74.15" Width="718.2" Height="75.6" DataSource="productList">
+      <TextObject Name="Text1" Left="75.6" Top="9.45" Width="94.5" Height="18.9" Text="[productList.nomeProduto]" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="198.45" Top="9.45" Width="94.5" Height="18.9" Text="[productList.estoque]" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="330.75" Top="9.45" Width="94.5" Height="18.9" Text="[productList.valorVenda]" Format="Currency" Format.UseLocale="true" Format.DecimalDigits="2" HorzAlign="Right" WordWrap="false" Font="Arial, 10pt" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text7" Left="463.05" Top="9.45" Width="94.5" Height="18.9" Text="[productList.dataCadastro]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="604.8" Top="9.45" Width="94.5" Height="18.9" Text="[productList.dataAlteracao]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="153.75" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

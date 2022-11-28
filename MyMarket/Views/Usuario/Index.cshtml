@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyMarket.Models.DtoProduto>
+﻿@model IEnumerable<MyMarket.Models.DtoUsuario>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,20 +22,18 @@
     <thead>
         <tr>
             <th>
-                Nome do produto
+               Nome usuario
             </th>
             <th>
-                Imagem
+                email
             </th>
             <th>
-                Valor de venda
+               telefone
             </th>
             <th>
-                estoque
+                cpf
             </th>
-            <th>
-                categoria
-            </th>
+          
             <th></th>
         </tr>
     </thead>
@@ -43,33 +41,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.nomeProduto)
+                @Html.DisplayFor(modelItem => item.nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.imagem)
+                @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.valorVenda)
+                @Html.DisplayFor(modelItem => item.telefone)
             </td>
              <td>
-                @Html.DisplayFor(modelItem => item.estoque)
+                @Html.DisplayFor(modelItem => item.cpf)
             </td>
 
-             <td>
-                @Html.DisplayFor(modelItem => item.categoria)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-warning">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.id" class="btn btn-info">Detalhes</a> 
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Deletar</a>
-                 
-            </td>
+     
         </tr>
 }    <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="CreateReport">Create Report</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="CreateReportUser">Create Report</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Produto" asp-action="ProductsReport">Report PDF</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="UsuarioReport">Report PDF</a>
                         </li>
     </tbody>
 </table>

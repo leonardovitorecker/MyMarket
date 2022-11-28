@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MyMarket.Migrations
 {
-    public partial class _323 : Migration
+    public partial class MYPMR : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,22 +21,6 @@ namespace MyMarket.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_categorias", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "pedidos",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    usuarioid = table.Column<int>(type: "integer", nullable: false),
-                    recordId = table.Column<int>(type: "integer", nullable: false),
-                    valorTotal = table.Column<decimal>(type: "numeric", nullable: false),
-                    dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_pedidos", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,10 +50,8 @@ namespace MyMarket.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     nomeProduto = table.Column<string>(type: "text", nullable: false),
-                    arquivo = table.Column<byte[]>(type: "bytea", nullable: true),
-                    imagem = table.Column<string>(type: "text", nullable: true),
-                    valorVenda = table.Column<decimal>(type: "numeric", nullable: false),
                     estoque = table.Column<int>(type: "integer", nullable: false),
+                    valorVenda = table.Column<decimal>(type: "numeric", nullable: false),
                     estoqueAnterior = table.Column<int>(type: "integer", nullable: true),
                     categoriaid = table.Column<int>(type: "integer", nullable: false),
                     dataCadastro = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -113,6 +95,27 @@ namespace MyMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "pedidos",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    usuarioid = table.Column<int>(type: "integer", nullable: false),
+                    valorTotal = table.Column<decimal>(type: "numeric", nullable: false),
+                    dataPedido = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pedidos", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_pedidos_usuarios_usuarioid",
+                        column: x => x.usuarioid,
+                        principalTable: "usuarios",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "carrinhos",
                 columns: table => new
                 {
@@ -121,19 +124,40 @@ namespace MyMarket.Migrations
                     CarrinhoId = table.Column<string>(type: "text", nullable: false),
                     produtoId = table.Column<int>(type: "integer", nullable: false),
                     count = table.Column<int>(type: "integer", nullable: false),
-                    dateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Pedidoid = table.Column<int>(type: "integer", nullable: true)
+                    dateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_carrinhos", x => x.recordId);
                     table.ForeignKey(
-                        name: "FK_carrinhos_pedidos_Pedidoid",
-                        column: x => x.Pedidoid,
-                        principalTable: "pedidos",
-                        principalColumn: "id");
-                    table.ForeignKey(
                         name: "FK_carrinhos_produtos_produtoId",
+                        column: x => x.produtoId,
+                        principalTable: "produtos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemProduto",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    produtoId = table.Column<int>(type: "integer", nullable: false),
+                    pedidoId = table.Column<int>(type: "integer", nullable: false),
+                    quantidade = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemProduto", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemProduto_pedidos_pedidoId",
+                        column: x => x.pedidoId,
+                        principalTable: "pedidos",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemProduto_produtos_produtoId",
                         column: x => x.produtoId,
                         principalTable: "produtos",
                         principalColumn: "id",
@@ -169,11 +193,6 @@ namespace MyMarket.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_carrinhos_Pedidoid",
-                table: "carrinhos",
-                column: "Pedidoid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_carrinhos_produtoId",
                 table: "carrinhos",
                 column: "produtoId");
@@ -184,6 +203,16 @@ namespace MyMarket.Migrations
                 column: "usuarioid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItemProduto_pedidoId",
+                table: "ItemProduto",
+                column: "pedidoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemProduto_produtoId",
+                table: "ItemProduto",
+                column: "produtoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PedidoDetalhes_PedidoId",
                 table: "PedidoDetalhes",
                 column: "PedidoId");
@@ -192,6 +221,11 @@ namespace MyMarket.Migrations
                 name: "IX_PedidoDetalhes_produtoId",
                 table: "PedidoDetalhes",
                 column: "produtoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pedidos_usuarioid",
+                table: "pedidos",
+                column: "usuarioid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_produtos_categoriaid",
@@ -208,16 +242,19 @@ namespace MyMarket.Migrations
                 name: "enderecos");
 
             migrationBuilder.DropTable(
-                name: "PedidoDetalhes");
+                name: "ItemProduto");
 
             migrationBuilder.DropTable(
-                name: "usuarios");
+                name: "PedidoDetalhes");
 
             migrationBuilder.DropTable(
                 name: "pedidos");
 
             migrationBuilder.DropTable(
                 name: "produtos");
+
+            migrationBuilder.DropTable(
+                name: "usuarios");
 
             migrationBuilder.DropTable(
                 name: "categorias");
