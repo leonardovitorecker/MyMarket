@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyMarket.Database;
 using MyMarket.Helper;
+using MyMarket.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +11,13 @@ builder.Services.AddDbContext<Context>(
     options => options.UseNpgsql(
 
 
-        "Host=localhost;Port=5432;Database=market22;User Id=postgres; Password=root;"));
+        "Host=localhost;Port=5432;Database=mart;User Id=postgres; Password=root;"));
 
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ISessao, Sessao>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddSession();
 builder.Services.AddSession(o =>
 {

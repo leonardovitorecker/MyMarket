@@ -28,7 +28,6 @@ namespace MyMarket.Controllers
                                id = p.id,
                                nomeProduto = p.nomeProduto,
                                valorVenda = p.valorVenda,
-                               imagem = p.imagem,
                            });
 
             if (!String.IsNullOrEmpty(searchstring))

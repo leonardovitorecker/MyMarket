@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyMarket.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20221107225951_databae")]
-    partial class databae
+    [Migration("20221128182159_MYPMR")]
+    partial class MYPMR
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,6 +112,32 @@ namespace MyMarket.Migrations
                     b.ToTable("enderecos");
                 });
 
+            modelBuilder.Entity("MyMarket.Models.ItemProduto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("pedidoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("produtoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("quantidade")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("pedidoId");
+
+                    b.HasIndex("produtoId");
+
+                    b.ToTable("ItemProduto");
+                });
+
             modelBuilder.Entity("MyMarket.Models.Pedido", b =>
                 {
                     b.Property<int>("id")
@@ -120,11 +146,8 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("dataCadastro")
+                    b.Property<DateTime>("dataPedido")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("produtoid")
-                        .HasColumnType("integer");
 
                     b.Property<int>("usuarioid")
                         .HasColumnType("integer");
@@ -133,6 +156,8 @@ namespace MyMarket.Migrations
                         .HasColumnType("numeric");
 
                     b.HasKey("id");
+
+                    b.HasIndex("usuarioid");
 
                     b.ToTable("pedidos");
                 });
@@ -174,9 +199,6 @@ namespace MyMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("id"));
 
-                    b.Property<byte[]>("arquivo")
-                        .HasColumnType("bytea");
-
                     b.Property<int>("categoriaid")
                         .HasColumnType("integer");
 
@@ -189,8 +211,8 @@ namespace MyMarket.Migrations
                     b.Property<int>("estoque")
                         .HasColumnType("integer");
 
-                    b.Property<string>("imagem")
-                        .HasColumnType("text");
+                    b.Property<int?>("estoqueAnterior")
+                        .HasColumnType("integer");
 
                     b.Property<string>("nomeProduto")
                         .IsRequired()
@@ -268,6 +290,36 @@ namespace MyMarket.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("MyMarket.Models.ItemProduto", b =>
+                {
+                    b.HasOne("MyMarket.Models.Pedido", "Pedido")
+                        .WithMany("itensProdutos")
+                        .HasForeignKey("pedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyMarket.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("produtoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
+                });
+
+            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
+                {
+                    b.HasOne("MyMarket.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("usuarioid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("MyMarket.Models.PedidoDetalhe", b =>
                 {
                     b.HasOne("MyMarket.Models.Pedido", "pedido")
@@ -299,6 +351,11 @@ namespace MyMarket.Migrations
             modelBuilder.Entity("MyMarket.Models.Categoria", b =>
                 {
                     b.Navigation("produtos");
+                });
+
+            modelBuilder.Entity("MyMarket.Models.Pedido", b =>
+                {
+                    b.Navigation("itensProdutos");
                 });
 
             modelBuilder.Entity("MyMarket.Models.Usuario", b =>

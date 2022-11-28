@@ -3,17 +3,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyMarket.Database;
 using MyMarket.Models;
+using MyMarket.Services;
+using FastReport.Export.PdfSimple;
+using System.Diagnostics;
 
 namespace MyMarket.Controllers
 {
     public class ProdutoController : Controller
     {
         private readonly Context _bancocontext;
-        private readonly IWebHostEnvironment webHostEnvironment;
-        public ProdutoController(Context context, IWebHostEnvironment hostEnvironment)
+        private readonly IWebHostEnvironment _webHostEnv;
+        private readonly IProductService _productService;
+        public ProdutoController(Context context, IWebHostEnvironment webHostEnv,
+             IProductService productService)
         {
             _bancocontext = context;
-            webHostEnvironment = hostEnvironment;
+            _webHostEnv = webHostEnv;
+            _productService = productService;
         }
 
         // GET: Chamada
@@ -25,7 +31,6 @@ namespace MyMarket.Controllers
                                       {
                                           id = p.id,
                                           nomeProduto = p.nomeProduto,
-                                          imagem = p.imagem,
                                           valorVenda = p.valorVenda,
                                           categoria = c.nome,
                                           estoque = p.estoque
@@ -33,6 +38,48 @@ namespace MyMarket.Controllers
 
             return View(lista);
         }
+        [Route("CreateReport")]
+        public IActionResult CreateReport()
+        {
+            var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"reports\ReportMvc.frx");
+            var reportFile = caminhoReport;
+            var freport = new FastReport.Report();
+            var productList = _productService.GetProducts();
+
+            freport.Dictionary.RegisterBusinessObject(productList, "productList", 10, true);
+            freport.Report.Save(reportFile);
+
+            return Ok($" Relatorio gerado : {caminhoReport}");
+        }
+        [Route("ProductsReport")]
+        public IActionResult ProductsReport()
+        {
+            var caminhoReport = Path.Combine(_webHostEnv.WebRootPath, @"reports\ReportMvc.frx");
+            var reportFile = caminhoReport;
+            var freport = new FastReport.Report();
+            var productList = _productService.GetProducts();
+
+            freport.Report.Load(reportFile);
+            freport.Dictionary.RegisterBusinessObject(productList, "productList", 10, true);
+            //freport.Report.Save(reportFile);
+            freport.Prepare();
+
+            var pdfExport = new PDFSimpleExport();
+
+            using MemoryStream ms = new MemoryStream();
+            pdfExport.Export(freport, ms);
+            ms.Flush();
+
+            return File(ms.ToArray(), "application/pdf");
+            //return Ok($"Relatorio gerado: {caminhoReport}");
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -59,19 +106,11 @@ namespace MyMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,nomeProduto,estoque,imagem,valorVenda,categoriaid")] Produto Produto, IFormFile arquivo)
+        public async Task<IActionResult> Create([Bind("id,nomeProduto,estoque,valorVenda,categoriaid")] Produto Produto)
          {
             if (ModelState.IsValid)
             {
-                var httpRequest = Request.Form;
-                var postedFile = httpRequest.Files[0];
-                string filename = postedFile.FileName;
-                var physicalPath = webHostEnvironment.ContentRootPath + "/Arquivo/" + filename;
-                using (var stream = new FileStream(physicalPath, FileMode.Create))
-                {
-                    postedFile.CopyTo(stream);
-                }
-                Produto.imagem = arquivo.FileName;
+               
                 
                 _bancocontext.Add(Produto);
                 await _bancocontext.SaveChangesAsync();
@@ -99,7 +138,7 @@ namespace MyMarket.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,imagem,estoque,valorVenda,categoriaid")] Produto Produto)
+        public async Task<IActionResult> Edit(int id, [Bind("id,nomeProduto,estoque,valorVenda,categoriaid")] Produto Produto)
         {
             if (id != Produto.id)
             {
